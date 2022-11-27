@@ -1,39 +1,20 @@
-import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
-import { useLoaderData } from "react-router-dom";
-import ProductCard from "../ProductCard/ProductCard";
+import { useQuery } from '@tanstack/react-query';
+import React, { useState } from 'react';
+import ProductCard from '../ProductCard/ProductCard';
 
-const ProductsByBrand = () => {
-    const brandsProducts = useLoaderData();
-    console.log(ProductsByBrand);
-    //   const [checkout,setCheckout] = useState(null)
+const LowBudget = () => {
 
-
-
-
-
-    // const { data: allProductscollection = [], refetch } = useQuery({
-    //     queryKey: ["productsByBrand"],
-    //     queryFn: async (params) => {
-    //         const res = await fetch(` http://localhost:5000/productsByBrand/${params.name}`);
-    //         const data = await res.json();
-    //         return data;
-    //     },
-    // });
+    const { data: brandsProducts = [], refetch } = useQuery({
+        queryKey: ["sellers"],
+        queryFn: async () => {
+            const res = await fetch("http://localhost:5000/productsByBrand/Low Budget");
+            const data = await res.json();
+            return data;
+        },
+    });
 
 
-   
-
-
-
-
-
-
-
-
-
-
-
+    
     const [productDetails, setProductDetails] = useState({});
     const handleProductDetails = (id) => {
         // setCheckout(productDetails)
@@ -49,7 +30,7 @@ const ProductsByBrand = () => {
     return (
         <div>
             <p className="text-4xl text-center font-bold">
-                {brandsProducts[0].category_name} has total {brandsProducts.length}{" "}
+                {/* {brandsProducts[0].category_name} has total {brandsProducts.length}{" "} */}
                 products.
             </p>
 
@@ -61,7 +42,7 @@ const ProductsByBrand = () => {
                         productDetails={{ productDetails }}
                         key={product._id}
                         product={product}
-                        // refetch={refetch}
+                        refetch={refetch}
                         // checkout={checkout}
                         // setCheckout={setCheckout}
                     ></ProductCard>
@@ -71,4 +52,4 @@ const ProductsByBrand = () => {
     );
 };
 
-export default ProductsByBrand;
+export default LowBudget;

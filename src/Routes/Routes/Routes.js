@@ -17,6 +17,9 @@ import AddProducts from "../../components/dashboard/AddProducts/AddProducts";
 import MyProducts from "../../components/dashboard/MyProducts/MyProducts";
 import Dashboard from "../../components/dashboard/Dashboard";
 import BuyerRoutes from "../BuyerRoute/BuyerRoute";
+import LowBudget from './../../components/LowBudget/LowBudget';
+import EntryLevel from "../../components/EntryLevel/EntryLevel";
+import HighBudget from "../../components/HighBudget/HighBudget";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -44,20 +47,49 @@ export const routes = createBrowserRouter([
                         <AllProducts></AllProducts>
                     </PrivateRoutes>
                 ),
-                loader: () => fetch("http://localhost:5000/all-products"),
+                // loader: () => fetch("http://localhost:5000/all-products"),
             },
             {
-                path: "/productsByBrand/:name",
+                path: "/productsByBrand/Low Budget",
                 element: (
                     <PrivateRoutes>
-                        <ProductsByBrand></ProductsByBrand>
+                        <LowBudget></LowBudget>
                     </PrivateRoutes>
                 ),
-                loader: ({ params }) =>
-                    fetch(
-                        `http://localhost:5000/productsByBrand/${params.name}`
-                    ),
+                // loader: () => fetch("http://localhost:5000/all-products"),
             },
+            {
+                path: "/productsByBrand/Entry Level",
+                element: (
+                    <PrivateRoutes>
+                        <EntryLevel></EntryLevel>
+                    </PrivateRoutes>
+                ),
+                // loader: () => fetch("http://localhost:5000/all-products"),
+            },
+            {
+                path: "/productsByBrand/High Budget",
+                element: (
+                    <PrivateRoutes>
+                        <HighBudget></HighBudget>
+                    </PrivateRoutes>
+                ),
+                // loader: () => fetch("http://localhost:5000/all-products"),
+            },
+
+
+            // {
+            //     path: "/productsByBrand/:name",
+            //     element: (
+            //         <PrivateRoutes>
+            //             <ProductsByBrand></ProductsByBrand>
+            //         </PrivateRoutes>
+            //     ),
+            //     loader: ({ params }) =>
+            //         fetch(
+            //             `http://localhost:5000/productsByBrand/${params.name}`
+            //         ),
+            // },
         ],
     },
 

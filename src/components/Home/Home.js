@@ -27,8 +27,9 @@ const Home = () => {
             <div className="flex md:flex-row flex-col md:w-1/4 mx-auto">
                 {categories.map((brand) => (
                     <Link
+                        // category={brand.category_name}
                         to={`/productsByBrand/${brand.category_name}`}
-                        onClick={() => handleBrandProducts(brand.category_name)}
+                        // onClick={() => handleBrandProducts(brand.category_name)}
                         key={brand._id}
                         className="btn btn-primary mr-4"
                     >

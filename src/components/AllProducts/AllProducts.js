@@ -1,9 +1,20 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import ProductCard from "./../ProductCard/ProductCard";
 
 const AllProducts = () => {
-    const allProductscollection = useLoaderData();
+    // const allProductscollection = useLoaderData();
+
+
+    const { data: allProductscollection = [], refetch } = useQuery({
+        queryKey: ["sellers"],
+        queryFn: async () => {
+            const res = await fetch("http://localhost:5000/all-products");
+            const data = await res.json();
+            return data;
+        },
+    });
 
     const [productDetails, setProductDetails] = useState([]);
     const handleProductDetails = (id) => {
@@ -24,6 +35,7 @@ const AllProducts = () => {
                     productDetails={{ productDetails }}
                     product={product}
                     key={product._id}
+                    refetch={refetch}
                 ></ProductCard>
             ))}
         </div>

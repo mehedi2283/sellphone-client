@@ -1,10 +1,12 @@
 import toast from "react-hot-toast";
 
-const OrderModal = ({ checkout, setCheckout, user, id, productDetails }) => {
+const OrderModal = ({ checkout, setCheckout, user, id, productDetails,refetch }) => {
     // Checkout is just another name of appointmentOptions with name, slots, _id
     // const { name, slots } = checkout;
 
-    const { model_name, resale_price,picture } = productDetails.productDetails;
+    const { model_name, resale_price,picture,_id } = productDetails.productDetails;
+
+    // console.log(_id)
 
     const handleOrder = (event) => {
         event.preventDefault();
@@ -38,11 +40,37 @@ const OrderModal = ({ checkout, setCheckout, user, id, productDetails }) => {
         })
             .then((res) => res.json())
             .then((data) => {
-                // console.log(data);
+                console.log(data);
                 if (data.acknowledged) {
                     form.reset();
 
-                    toast.success("Order Placed Successfully");
+                  
+
+
+
+
+                    
+                        fetch(`http://localhost:5000/all-products/disable/${_id}`, {
+                            method: "PUT",
+                            headers: {
+                                authorization: `bearer ${localStorage.getItem("accessToken")}`,
+                            },
+                        })
+                            .then((res) => res.json())
+                            .then((data) => {
+                                if (data.modifiedCount > 0) {
+                                    toast.success("Order Placed Successfully");
+                                    refetch();
+                                }
+                            });
+                
+                        // console.log(id);
+                    
+                
+
+
+
+
                 }
             })
             .catch((err) => console.log(err));

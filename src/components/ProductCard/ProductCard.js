@@ -10,6 +10,7 @@ const ProductCard = ({
     checkout,
     productDetails,
     handleProductDetails,
+    refetch
 }) => {
 
     const { user } = useContext(AuthContext);
@@ -26,9 +27,10 @@ const ProductCard = ({
         posted_time,
         seller_name,
         isVerified,
+        isBooked,
     } = product;
 
-    console.log(name,isVerified);
+    console.log(name,isBooked);
 
     //picture, name, location, resale price, original price, years of use, the time when it got posted, the seller's name; if the seller is verified, there will be a blue tick next to their name and a Book now button.
 
@@ -70,9 +72,9 @@ const ProductCard = ({
                     <label
                         onClick={() => handleProductDetails(product._id)}
                         htmlFor="order-modal"
-                        className={`  ${isBuyer === false ?'btn-disabled btn btn-primary w-full':'btn btn-primary w-full'} `}
+                        className={`  ${isBuyer === false || isBooked ==='booked' ?'btn-disabled btn btn-primary w-full':'btn btn-primary w-full'} `}
                     >
-                        Book Now
+                       {` ${isBuyer === false || isBooked ==='booked' ?'Not Available':' Book Now'}`}
                     </label>
 
                     <OrderModal
@@ -80,6 +82,7 @@ const ProductCard = ({
                         // setCheckout={setCheckout}
                         id={product._id}
                         user={user}
+                        refetch={refetch}
                     ></OrderModal>
                 </div>
             </div>
