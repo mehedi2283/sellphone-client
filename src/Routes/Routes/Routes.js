@@ -5,7 +5,7 @@ import Error404 from "./../.././components/404/Error404";
 import SignIn from "./../../components/Login/SignIn/SignIn";
 import SignUp from "./../../components/Login/SignUp/SignUp";
 import AllProducts from "./../../components/AllProducts/AllProducts";
-import ProductsByBrand from "./../../components/ProductsByBrand/ProductsByBrand";
+
 import PrivateRoutes from "./../PrivateRoutes/PrivateRoutes";
 import DashboardLayout from "../../layout/DashboardLayout";
 import MyOrders from "../../components/dashboard/MyOrders/MyOrders";
@@ -15,9 +15,9 @@ import AdminRoutes from "../AdminRoutes/AdminRoutes";
 import SellerRoutes from "../SellerRoutes/SellerRoutes";
 import AddProducts from "../../components/dashboard/AddProducts/AddProducts";
 import MyProducts from "../../components/dashboard/MyProducts/MyProducts";
-import Dashboard from "../../components/dashboard/Dashboard";
+
 import BuyerRoutes from "../BuyerRoute/BuyerRoute";
-import LowBudget from './../../components/LowBudget/LowBudget';
+import LowBudget from "./../../components/LowBudget/LowBudget";
 import EntryLevel from "../../components/EntryLevel/EntryLevel";
 import HighBudget from "../../components/HighBudget/HighBudget";
 
@@ -47,7 +47,7 @@ export const routes = createBrowserRouter([
                         <AllProducts></AllProducts>
                     </PrivateRoutes>
                 ),
-                // loader: () => fetch("http://localhost:5000/all-products"),
+               
             },
             {
                 path: "/productsByBrand/Low Budget",
@@ -56,7 +56,7 @@ export const routes = createBrowserRouter([
                         <LowBudget></LowBudget>
                     </PrivateRoutes>
                 ),
-                // loader: () => fetch("http://localhost:5000/all-products"),
+                
             },
             {
                 path: "/productsByBrand/Entry Level",
@@ -65,7 +65,7 @@ export const routes = createBrowserRouter([
                         <EntryLevel></EntryLevel>
                     </PrivateRoutes>
                 ),
-                // loader: () => fetch("http://localhost:5000/all-products"),
+               
             },
             {
                 path: "/productsByBrand/High Budget",
@@ -74,35 +74,28 @@ export const routes = createBrowserRouter([
                         <HighBudget></HighBudget>
                     </PrivateRoutes>
                 ),
-                // loader: () => fetch("http://localhost:5000/all-products"),
+              
             },
 
-
-            // {
-            //     path: "/productsByBrand/:name",
-            //     element: (
-            //         <PrivateRoutes>
-            //             <ProductsByBrand></ProductsByBrand>
-            //         </PrivateRoutes>
-            //     ),
-            //     loader: ({ params }) =>
-            //         fetch(
-            //             `http://localhost:5000/productsByBrand/${params.name}`
-            //         ),
-            // },
         ],
     },
 
     {
-        path: "/dashboard",
+        path: "/",
         element: (
             <PrivateRoutes>
                 <DashboardLayout></DashboardLayout>
             </PrivateRoutes>
         ),
         children: [
-            { path: "/dashboard", element: <Dashboard></Dashboard> },
-            { path: "/dashboard/myOrder", element: <BuyerRoutes><MyOrders></MyOrders></BuyerRoutes> },
+            {
+                path: "/dashboard/myOrder",
+                element: (
+                    <BuyerRoutes>
+                        <MyOrders></MyOrders>
+                    </BuyerRoutes>
+                ),
+            },
             {
                 path: "/dashboard/all-users",
                 element: (

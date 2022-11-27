@@ -96,7 +96,7 @@ const OrderModal = ({ checkout, setCheckout, user, id, productDetails,refetch })
                         </label>
                         <input
                             name="name"
-                            value={user.displayName}
+                            value={user?.displayName}
                             readOnly
                             type="text"
                             placeholder="Your Name"
@@ -108,7 +108,7 @@ const OrderModal = ({ checkout, setCheckout, user, id, productDetails,refetch })
                         </label>
                         <input
                             name="email"
-                            value={user.email}
+                            value={user?.email}
                             readOnly
                             type="email"
                             placeholder="Email Address"

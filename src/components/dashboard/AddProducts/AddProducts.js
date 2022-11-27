@@ -4,12 +4,14 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 import useSellerVerified from "../../../hook/useSellerAdmin";
 import useTitle from "../../../hooks/useTitle";
+import useSeller from './../../../hook/useSeller';
 
 const AddProducts = () => {
     const { user } = useContext(AuthContext);
     useTitle("Add Product");
     const [isSellerVerified, isSellerLoadingrVerified] = useSellerVerified();
-    // console.log(isSellerVerified);
+    const [isSeller,] = useSeller(user?.email);
+    console.log('verified seller',isSeller);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -45,7 +47,7 @@ const AddProducts = () => {
             number,
             details,
             ratings: "5",
-            isVerified: isSellerVerified,
+            isVerified: isSeller,
         };
 
         fetch("http://localhost:5000/add-products", {

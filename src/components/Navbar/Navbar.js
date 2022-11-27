@@ -102,7 +102,7 @@ const Navbar = () => {
                         " "
                     )}
                 </div>
-                <NavLink>Blogs</NavLink>
+                <NavLink to='Blogs'>Blogs</NavLink>
             </div>
             {/* <div className="navbar-end">
     <Link to='/sign_in' className="btn">Login</Link>

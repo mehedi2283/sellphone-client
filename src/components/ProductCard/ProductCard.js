@@ -14,7 +14,7 @@ const ProductCard = ({
 }) => {
 
     const { user } = useContext(AuthContext);
-    const [isBuyer] = useBuyer(user.email)
+    const [isBuyer] = useBuyer(user?.email)
     // console.log(isBuyer)
 
     const {
@@ -35,7 +35,7 @@ const ProductCard = ({
     //picture, name, location, resale price, original price, years of use, the time when it got posted, the seller's name; if the seller is verified, there will be a blue tick next to their name and a Book now button.
 
     return (
-        <div className="card card-compact w-96 bg-base-100 shadow-xl mb-6">
+        <div className="card card-compact w-72 max-w- bg-base-100 shadow-xl mb-6">
             <figure>
                 <img src={picture} alt={name} />
             </figure>
@@ -72,7 +72,7 @@ const ProductCard = ({
                     <label
                         onClick={() => handleProductDetails(product._id)}
                         htmlFor="order-modal"
-                        className={`  ${isBuyer === false || isBooked ==='booked' ?'btn-disabled btn btn-primary w-full':'btn btn-primary w-full'} `}
+                        className={`  ${isBuyer === false || isBooked ==='booked'  ?'btn-disabled btn btn-primary w-full':'btn btn-primary w-full'} `}
                     >
                        {` ${isBuyer === false || isBooked ==='booked' ?'Not Available':' Book Now'}`}
                     </label>
