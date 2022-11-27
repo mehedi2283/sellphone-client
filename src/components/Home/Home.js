@@ -133,7 +133,7 @@ const Home = () => {
                     </div>
                 </div>
 
-                <div>
+                <div className={`${advertiseProducts.length > 0 ?'':'hidden'}`}>
                     <h1 className="text-5xl -translate-x-44 text-center font-bold ">
                         Featured Products {advertiseProducts.length}
                     </h1>

@@ -26,7 +26,9 @@ const { createBrowserRouter } = require("react-router-dom");
 export const routes = createBrowserRouter([
     {
         path: "/",
+        
         element: <Main></Main>,
+        errorElement:<Error404></Error404>,
         children: [
             {
                 path: "/",
@@ -47,7 +49,6 @@ export const routes = createBrowserRouter([
                         <AllProducts></AllProducts>
                     </PrivateRoutes>
                 ),
-               
             },
             {
                 path: "/productsByBrand/Low Budget",
@@ -56,7 +57,6 @@ export const routes = createBrowserRouter([
                         <LowBudget></LowBudget>
                     </PrivateRoutes>
                 ),
-                
             },
             {
                 path: "/productsByBrand/Entry Level",
@@ -65,7 +65,6 @@ export const routes = createBrowserRouter([
                         <EntryLevel></EntryLevel>
                     </PrivateRoutes>
                 ),
-               
             },
             {
                 path: "/productsByBrand/High Budget",
@@ -74,19 +73,19 @@ export const routes = createBrowserRouter([
                         <HighBudget></HighBudget>
                     </PrivateRoutes>
                 ),
-              
             },
-
         ],
     },
 
     {
         path: "/",
+        
         element: (
             <PrivateRoutes>
                 <DashboardLayout></DashboardLayout>
             </PrivateRoutes>
         ),
+        errorElement:<Error404></Error404>,
         children: [
             {
                 path: "/dashboard/myOrder",
@@ -120,12 +119,24 @@ export const routes = createBrowserRouter([
                     </SellerRoutes>
                 ),
             },
-            { path: "/dashboard/payment", element: <Payment></Payment> },
+            {
+                path: "/dashboard/payment/:id",
+                element: (
+                    <BuyerRoutes>
+                        <Payment></Payment>
+                    </BuyerRoutes>
+                ),
+                loader: ({ params }) =>
+                    fetch(`http://localhost:5000/orders/${params.id}`, {
+                        headers: {
+                            authorization: `bearer ${localStorage.getItem(
+                                "accessToken"
+                            )}`,
+                        },
+                    }),
+            },
         ],
     },
 
-    {
-        path: "*",
-        element: <Error404></Error404>,
-    },
+
 ]);
