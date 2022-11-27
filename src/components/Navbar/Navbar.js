@@ -13,9 +13,9 @@ const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext);
 
-    // const [isAdmin] = useAdmin(user?.email);
-    // const [isSeller] = useSeller(user.email);
-    // const [isBuyer] = useBuyer(user.email);
+    const [isAdmin] = useAdmin(user?.email);
+    // const [isSeller] = useSeller(user?.email);
+    const [isBuyer] = useBuyer(user?.email);
 
     // const handleNavigate = (isAdmin, isSeller, isBuyer) => {
     //     console.log(isAdmin, isSeller, isBuyer);
@@ -24,7 +24,7 @@ const Navbar = () => {
     //     }
     // };
 
-    // console.log("i am user", user);
+    console.log("i am user", isAdmin);
     const handleLogOut = () => {
         logOut();
         toast.success("Successfully logged out");
@@ -82,22 +82,12 @@ const Navbar = () => {
                 <div className="menu menu-horizontal p-0">
                     {user ? (
                         <div className="flex items-center justify-end gap-2">
-                            {/* {isAdmin && (
-                                <Navigate to="/dashboard/all-users" replace={true} />
-                            )}
-                            {isSeller && (
-                                <Navigate to="/dashboard" replace={true} />
-                            )}
-                            {isBuyer && (
-                                <Navigate to="/dashboard" replace={true} />
-                            )} */}
+                           
 
                             <NavLink
                                 className=" px-6 "
-                                to="/dashboard"
-                                // onClick={() =>
-                                //     handleNavigate(isAdmin, isSeller, isBuyer)
-                                // }
+                                to={`${isBuyer?'/dashboard/myOrder':isAdmin?'/dashboard/all-users':'dashboard/MyProducts'}`}
+                               
                             >
                                 <span className="me-2 fs-5 ">Dashboard</span>
                             </NavLink>
