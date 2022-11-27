@@ -28,12 +28,12 @@ const DashboardLayout = () => {
                 <div className="drawer-content">
                     <Outlet></Outlet>
                 </div>
-                <div className="drawer-side">
+                <div className="drawer-side ">
                     <label
                         htmlFor="dashboard-drawer"
                         className="drawer-overlay"
                     ></label>
-                    <ul className="menu p-4 w-80  text-base-content">
+                    <ul className="menu p-4 w-80  max-lg:bg-base-100 bg-base-100 text-base-content">
                         {/* <!-- Sidebar content here --> */}
                         {
                             isBuyer &&

@@ -26,7 +26,7 @@ const ProductCardForSeller = ({ product, refetch }) => {
     const {
         _id,
         picture,
-        model_name: name,
+        model_name,
         location,
         resale_price,
         original_price,
@@ -55,7 +55,7 @@ const ProductCardForSeller = ({ product, refetch }) => {
         })
             .then((res) => res.json())
             .then((data) => {
-                toast.success(`Deleted ${name} seccessfully `);
+                toast.success(`Deleted ${model_name} seccessfully `);
                 refetch();
             });
     };
@@ -64,7 +64,7 @@ const ProductCardForSeller = ({ product, refetch }) => {
     const advertiseProduct ={
         _id,
         picture,
-        model_name: name,
+        model_name,
         location,
         resale_price,
         original_price,
@@ -109,10 +109,10 @@ const ProductCardForSeller = ({ product, refetch }) => {
     return (
         <div className="card card-compact w-96 bg-base-100 shadow-xl mb-6">
             <figure>
-                <img src={picture} alt={name} />
+                <img src={picture} alt={model_name} />
             </figure>
             <div className="card-body">
-                <h2 className="text-2xl font-bold  text-center">{name}</h2>
+                <h2 className="text-2xl font-bold  text-center">{model_name}</h2>
                 <p className="text-center text-base font-medium">
                     Location: {location}
                 </p>
@@ -170,7 +170,7 @@ const ProductCardForSeller = ({ product, refetch }) => {
                 clickedId &&
                 <ConfirmationModal
                     title={`Are you sure you want to delete ?`}
-                    message={` ${name} will be deleted.`}
+                    message={` ${model_name} will be deleted.`}
                     closeModal={closeModal}
                     successAction={handleSellerProductDelete}
                     successButtonName="Delete"
