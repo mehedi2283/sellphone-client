@@ -20,7 +20,7 @@ const Error404 = () => {
             
 
             <ExclamationTriangleIcon className="h-32 w-32 text-center mx-auto animate-bounce mt-6"></ExclamationTriangleIcon>
-            <p className=" ">{error.status || error.message}</p>
+            <p className=" text-lg">{error.status || error.message}</p>
             <h1>No Route Found!</h1>
             <h1 className=" ">Something Went Wrong.</h1>
             <Link

@@ -6,7 +6,7 @@ const OrderModal = ({ checkout, setCheckout, user, id, productDetails,refetch })
 
     const { model_name, resale_price,picture,_id } = productDetails.productDetails;
 
-    // console.log(_id)
+    console.log(resale_price)
 
     const handleOrder = (event) => {
         event.preventDefault();
@@ -14,7 +14,7 @@ const OrderModal = ({ checkout, setCheckout, user, id, productDetails,refetch })
         const name = form.name.value;
         const email = form.email.value;
         const model = form.model.value;
-        const resalePrice = form.resale_price.value;
+        
         const phone = form.phone.value;
         const location = form.location.value;
         // [3, 4, 5].map((value, i) => console.log(value))
@@ -22,7 +22,7 @@ const OrderModal = ({ checkout, setCheckout, user, id, productDetails,refetch })
             name,
             email,
             model,
-            resalePrice,
+            resalePrice:resale_price,
             phone,
             location,
             picture

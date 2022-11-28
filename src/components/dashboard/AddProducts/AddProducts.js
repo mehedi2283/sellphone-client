@@ -126,7 +126,7 @@ const AddProducts = () => {
                         />
                         <input
                             name="resale_price"
-                            type="text"
+                            type="number"
                             required
                             placeholder="Resale Price"
                             className="input input-bordered  w-full focus:bg-primary/10 bg-primary/5  focus:outline-0 focus:border-primary focus:text-primary"

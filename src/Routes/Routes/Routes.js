@@ -127,13 +127,7 @@ export const routes = createBrowserRouter([
                     </BuyerRoutes>
                 ),
                 loader: ({ params }) =>
-                    fetch(`http://localhost:5000/orders/${params.id}`, {
-                        headers: {
-                            authorization: `bearer ${localStorage.getItem(
-                                "accessToken"
-                            )}`,
-                        },
-                    }),
+                    fetch(`http://localhost:5000/orders/${params.id}`),
             },
         ],
     },
