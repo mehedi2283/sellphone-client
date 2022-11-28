@@ -5,8 +5,6 @@ import ProductCardForSeller from "./../../ProductCard/ProductCardForSeller";
 import useTitle from "../../../hooks/useTitle";
 
 const MyProducts = () => {
-
-
     useTitle("MY Products");
     const { user } = useContext(AuthContext);
 
@@ -14,7 +12,7 @@ const MyProducts = () => {
         queryKey: ["orders", user?.email],
         queryFn: async () => {
             const res = await fetch(
-                `http://localhost:5000/myProducts?email=${user?.email}`,
+                `sellphone-server-mehedi2283.vercel.app/myProducts?email=${user?.email}`,
                 {
                     headers: {
                         authorization: `bearer ${localStorage.getItem(
@@ -31,7 +29,9 @@ const MyProducts = () => {
     console.log(myProducts);
     return (
         <div>
-            <p className="text-center text-3xl font-bold mb-9">My total products: {myProducts.length}</p>
+            <p className="text-center text-3xl font-bold mb-9">
+                My total products: {myProducts.length}
+            </p>
             <div className=" grid lg:grid-cols-3 md:grid-cols-2">
                 {myProducts.map((product) => (
                     <ProductCardForSeller

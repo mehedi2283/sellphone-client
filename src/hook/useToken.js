@@ -9,7 +9,7 @@ const useToken = (email) => {
     const { logOut, setLoading } = useContext(AuthContext);
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/jwt?email=${email}`)
+            fetch(`sellphone-server-mehedi2283.vercel.app/jwt?email=${email}`)
                 .then((res) => res.json())
                 .then((data) => {
                     console.log(data);

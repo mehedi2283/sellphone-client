@@ -14,7 +14,6 @@ import { HiChevronDoubleDown } from "react-icons/hi2";
 import useTitle from "../../hooks/useTitle";
 
 const Home = () => {
-
     useTitle("Home");
     //  const {user} = useContext(AuthContext)
 
@@ -23,10 +22,9 @@ const Home = () => {
     // const [isSeller] = useSeller(user?.email)
     // const [isAdmin] = useAdmin(user?.email)
 
-    const [advertiseProducts, setAdvertiseProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/brands`)
+        fetch(`sellphone-server-mehedi2283.vercel.app/brands`)
             .then((res) => res.json())
             .then((data) => setCategories(data))
             .catch((err) => console.log(err));
@@ -40,7 +38,7 @@ const Home = () => {
 
     const [productDetails, setProductDetails] = useState([]);
     const handleProductDetails = (id) => {
-        fetch(`http://localhost:5000/all-products/${id}`)
+        fetch(`sellphone-server-mehedi2283.vercel.app/all-products/${id}`)
             .then((res) => res.json())
             .then((data) => setProductDetails(data));
 
@@ -55,21 +53,23 @@ const Home = () => {
     //     queryKey: ["advertise bal"],
     //     queryFn: async () => {
     //         const res = await fetch(
-    //             "https://http://localhost:5000/advrtiseMent"
+    //             "https://sellphone-server-mehedi2283.vercel.app/advrtiseMent"
     //         );
     //         const data = await res.json();
     //         return data;
     //     },
     // });
 
-    // console.log(advertiseProducts);
+    const [advertiseProducts, setAdvertiseProducts] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/advrtiseMent`)
+        fetch(`sellphone-server-mehedi2283.vercel.app/advrtiseMent`)
             .then((res) => res.json())
             .then((data) => setAdvertiseProducts(data))
             .catch((err) => console.log(err));
-    }, []);
+    }, [advertiseProducts.length]);
+
+    console.log("totoal advertised product:", advertiseProducts.length);
 
     if (loading) {
         return (

@@ -43,7 +43,7 @@ const ProductCardForSeller = ({ product, refetch }) => {
     const handleSellerProductDelete = (id) => {
         // console.log();
 
-        fetch(`http://localhost:5000/${id}`, {
+        fetch(`sellphone-server-mehedi2283.vercel.app/sellerProduct/${id}`, {
             method: "DELETE",
             headers: {
                 authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -74,14 +74,19 @@ const ProductCardForSeller = ({ product, refetch }) => {
     const handleAdvertise = (product) => {
         // console.log(product);
 
-        fetch(`http://localhost:5000/advertise/${product._id}`, {
-            method: "PUT",
-            headers: {
-                "content-type": "application/json",
-                authorization: `bearer ${localStorage.getItem("accessToken")}`,
-            },
-            body: JSON.stringify(advertiseProduct),
-        })
+        fetch(
+            `sellphone-server-mehedi2283.vercel.app/advertise/${product._id}`,
+            {
+                method: "PUT",
+                headers: {
+                    "content-type": "application/json",
+                    authorization: `bearer ${localStorage.getItem(
+                        "accessToken"
+                    )}`,
+                },
+                body: JSON.stringify(advertiseProduct),
+            }
+        )
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
@@ -138,7 +143,7 @@ const ProductCardForSeller = ({ product, refetch }) => {
                             disabled
                             className="btn  btn-outline border-0 hover:bg-green-600 text-green-600 bg-green-200"
                         >
-                            Not Available
+                            Booked
                         </button>
                     ) : (
                         <button

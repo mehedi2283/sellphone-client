@@ -34,11 +34,12 @@ const OrderModal = ({
             phone,
             location,
             picture,
+            orderID: _id,
         };
 
         console.log(order);
 
-        fetch("http://localhost:5000/orders", {
+        fetch("sellphone-server-mehedi2283.vercel.app/orders", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -52,19 +53,40 @@ const OrderModal = ({
                 if (data.acknowledged) {
                     form.reset();
 
-                    fetch(`http://localhost:5000/all-products/disable/${_id}`, {
-                        method: "PUT",
-                        headers: {
-                            authorization: `bearer ${localStorage.getItem(
-                                "accessToken"
-                            )}`,
-                        },
-                    })
+                    fetch(
+                        `sellphone-server-mehedi2283.vercel.app/all-products/disable/${_id}`,
+                        {
+                            method: "PUT",
+                            headers: {
+                                authorization: `bearer ${localStorage.getItem(
+                                    "accessToken"
+                                )}`,
+                            },
+                        }
+                    )
                         .then((res) => res.json())
                         .then((data) => {
                             if (data.modifiedCount > 0) {
-                                toast.success("Order Placed Successfully");
-                                refetch();
+                                fetch(
+                                    `sellphone-server-mehedi2283.vercel.app/advertise/${_id}`,
+                                    {
+                                        method: "DELETE",
+                                        headers: {
+                                            authorization: `bearer ${localStorage.getItem(
+                                                "accessToken"
+                                            )}`,
+                                        },
+                                    }
+                                )
+                                    .then((res) => res.json())
+                                    .then((data) => {
+                                        console.log(data);
+                                        toast.success(
+                                            "Order Placed Successfully"
+                                        );
+
+                                        refetch();
+                                    });
                             }
                         });
 

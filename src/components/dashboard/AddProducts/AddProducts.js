@@ -1,17 +1,20 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 import useSellerVerified from "../../../hook/useSellerAdmin";
 import useTitle from "../../../hooks/useTitle";
 import useSeller from "./../../../hook/useSeller";
 
 const AddProducts = () => {
+    const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     useTitle("Add Product");
-    const [isSellerVerified, isSellerLoadingrVerified] = useSellerVerified();
-    const [isSeller] = useSeller(user?.email);
-    console.log("verified seller", isSeller);
+    const [sellerVerified, isSellerLoadingrVerified] = useSellerVerified(
+        user?.email
+    );
+    // const [isSeller] = useSeller(user?.email);
+    console.log("verified seller", sellerVerified);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -47,10 +50,10 @@ const AddProducts = () => {
             number,
             details,
             ratings: "5",
-            isVerified: isSellerVerified,
+            isVerified: sellerVerified,
         };
 
-        fetch("http://localhost:5000/add-products", {
+        fetch("sellphone-server-mehedi2283.vercel.app/add-products", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -61,7 +64,9 @@ const AddProducts = () => {
             .then((data) => {
                 if (data.acknowledged) {
                     toast.success("Product added successfully.");
+                    console.log("sellerrrrrrrrrrrrrrrr:", sellerVerified);
                     form.reset();
+                    navigate("/dashboard/myProducts");
                 }
             })
             .catch((err) => console.error(err));

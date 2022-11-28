@@ -15,7 +15,7 @@ const AllUsers = () => {
     const handleDeleteSeller = (user) => {
         // console.log(seller);
 
-        fetch(`http://localhost:5000/users/${user._id}`, {
+        fetch(`sellphone-server-mehedi2283.vercel.app/users/${user._id}`, {
             method: "DELETE",
             headers: {
                 authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -34,19 +34,26 @@ const AllUsers = () => {
     const { data: sellers = [], refetch } = useQuery({
         queryKey: ["sellers"],
         queryFn: async () => {
-            const res = await fetch("http://localhost:5000/users-sellers");
+            const res = await fetch(
+                "sellphone-server-mehedi2283.vercel.app/users-sellers"
+            );
             const data = await res.json();
             return data;
         },
     });
 
     const handleVerified = (id) => {
-        fetch(`http://localhost:5000/users-sellers/isVerified/${id}`, {
-            method: "PUT",
-            headers: {
-                authorization: `bearer ${localStorage.getItem("accessToken")}`,
-            },
-        })
+        fetch(
+            `sellphone-server-mehedi2283.vercel.app/users-sellers/isVerified/${id}`,
+            {
+                method: "PUT",
+                headers: {
+                    authorization: `bearer ${localStorage.getItem(
+                        "accessToken"
+                    )}`,
+                },
+            }
+        )
             .then((res) => res.json())
             .then((data) => {
                 if (data.modifiedCount > 0) {
@@ -65,13 +72,13 @@ const AllUsers = () => {
                 <section>
                     <p className="text-center text-3xl font-bold">Sellers</p>
                     <div className="overflow-x-auto">
-                        <table className="table table-zebra w-full">
+                        <table className="table table-zebra w-full text-center">
                             <thead>
                                 <tr>
                                     <th></th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th></th>
+                                    <th>Status</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -84,17 +91,28 @@ const AllUsers = () => {
                                         <td>{seller.email}</td>
                                         <td>
                                             {seller.isVerified !==
-                                                "verified" && (
+                                            "verified" ? (
                                                 <button
                                                     onClick={() =>
                                                         handleVerified(
                                                             seller._id
                                                         )
                                                     }
-                                                    className="btn normal-case  btn-primary btn-xs "
+                                                    className="btn normal-case  btn-primary btn-xs bg-sky-200 hover:bg-sky-500  hover:text-white text-green-600 border-0  font-bold "
                                                 >
-                                                    Make Verified
+                                                    Verify Seller
                                                 </button>
+                                            ) : (
+                                                <p
+                                                    onClick={() =>
+                                                        handleVerified(
+                                                            seller._id
+                                                        )
+                                                    }
+                                                    className=" cursor-default hover:bg-green-500 btn btn-xs bg-green-500 border-0 normal-case   "
+                                                >
+                                                    Verifed
+                                                </p>
                                             )}
                                         </td>
                                         <td>

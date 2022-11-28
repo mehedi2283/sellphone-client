@@ -4,13 +4,12 @@ import useTitle from "../../hooks/useTitle";
 import ProductCard from "../ProductCard/ProductCard";
 
 const EntryLevel = () => {
-
     useTitle("Entry Level");
     const { data: brandsProducts = [], refetch } = useQuery({
         queryKey: ["sellers"],
         queryFn: async () => {
             const res = await fetch(
-                "http://localhost:5000/productsByBrand/Entry Level"
+                "sellphone-server-mehedi2283.vercel.app/productsByBrand/Entry Level"
             );
             const data = await res.json();
             return data;
@@ -21,7 +20,7 @@ const EntryLevel = () => {
     const handleProductDetails = (id) => {
         // setCheckout(productDetails)
 
-        fetch(`http://localhost:5000/all-products/${id}`)
+        fetch(`sellphone-server-mehedi2283.vercel.app/all-products/${id}`)
             .then((res) => res.json())
             .then((data) => setProductDetails(data));
 

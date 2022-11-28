@@ -9,7 +9,7 @@ const LowBudget = () => {
         queryKey: ["sellers"],
         queryFn: async () => {
             const res = await fetch(
-                "http://localhost:5000/productsByBrand/Low Budget"
+                "sellphone-server-mehedi2283.vercel.app/productsByBrand/Low Budget"
             );
             const data = await res.json();
             return data;
@@ -20,7 +20,7 @@ const LowBudget = () => {
     const handleProductDetails = (id) => {
         // setCheckout(productDetails)
 
-        fetch(`http://localhost:5000/all-products/${id}`)
+        fetch(`sellphone-server-mehedi2283.vercel.app/all-products/${id}`)
             .then((res) => res.json())
             .then((data) => setProductDetails(data));
 

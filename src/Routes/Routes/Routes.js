@@ -133,7 +133,9 @@ export const routes = createBrowserRouter([
                     </BuyerRoutes>
                 ),
                 loader: ({ params }) =>
-                    fetch(`http://localhost:5000/orders/${params.id}`),
+                    fetch(
+                        `sellphone-server-mehedi2283.vercel.app/orders/${params.id}`
+                    ),
             },
         ],
         errorElement: <Error404></Error404>,

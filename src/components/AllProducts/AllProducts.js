@@ -6,10 +6,16 @@ import ProductCard from "./../ProductCard/ProductCard";
 const AllProducts = () => {
     // const allProductscollection = useLoaderData();
 
-    const { data: allProductscollection = [], refetch } = useQuery({
+    const {
+        data: allProductscollection = [],
+        refetch,
+        isLoading,
+    } = useQuery({
         queryKey: ["sellers"],
         queryFn: async () => {
-            const res = await fetch("http://localhost:5000/all-products");
+            const res = await fetch(
+                "sellphone-server-mehedi2283.vercel.app/all-products"
+            );
             const data = await res.json();
             return data;
         },
@@ -17,7 +23,7 @@ const AllProducts = () => {
 
     const [productDetails, setProductDetails] = useState([]);
     const handleProductDetails = (id) => {
-        fetch(`http://localhost:5000/all-products/${id}`)
+        fetch(`sellphone-server-mehedi2283.vercel.app/all-products/${id}`)
             .then((res) => res.json())
             .then((data) => setProductDetails(data));
 
@@ -35,6 +41,7 @@ const AllProducts = () => {
                     product={product}
                     key={product._id}
                     refetch={refetch}
+                    isLoading
                 ></ProductCard>
             ))}
         </div>
