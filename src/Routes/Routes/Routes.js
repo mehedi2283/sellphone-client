@@ -22,15 +22,14 @@ import EntryLevel from "../../components/EntryLevel/EntryLevel";
 import HighBudget from "../../components/HighBudget/HighBudget";
 import Blogs from "../../components/Blogs/Blogs";
 
-
 const { createBrowserRouter } = require("react-router-dom");
 
 export const routes = createBrowserRouter([
     {
         path: "/",
-        
+
         element: <Main></Main>,
-        errorElement:<Error404></Error404>,
+
         children: [
             {
                 path: "/",
@@ -81,17 +80,18 @@ export const routes = createBrowserRouter([
                 ),
             },
         ],
+        errorElement: <Error404></Error404>,
     },
 
     {
         path: "/",
-        
+
         element: (
             <PrivateRoutes>
                 <DashboardLayout></DashboardLayout>
             </PrivateRoutes>
         ),
-        errorElement:<Error404></Error404>,
+
         children: [
             {
                 path: "/dashboard/myOrder",
@@ -133,10 +133,11 @@ export const routes = createBrowserRouter([
                     </BuyerRoutes>
                 ),
                 loader: ({ params }) =>
-                    fetch(`http://localhost:5000/orders/${params.id}`),
+                    fetch(
+                        ` https://sellphone-server-mehedi2283.vercel.app/orders/${params.id}`
+                    ),
             },
         ],
+        errorElement: <Error404></Error404>,
     },
-
-
 ]);

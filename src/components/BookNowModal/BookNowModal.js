@@ -1,12 +1,20 @@
 import toast from "react-hot-toast";
 
-const OrderModal = ({ checkout, setCheckout, user, id, productDetails,refetch }) => {
+const OrderModal = ({
+    checkout,
+    setCheckout,
+    user,
+    id,
+    productDetails,
+    refetch,
+}) => {
     // Checkout is just another name of appointmentOptions with name, slots, _id
     // const { name, slots } = checkout;
 
-    const { model_name, resale_price,picture,_id } = productDetails.productDetails;
+    const { model_name, resale_price, picture, _id } =
+        productDetails.productDetails;
 
-    console.log(resale_price)
+    console.log(resale_price);
 
     const handleOrder = (event) => {
         event.preventDefault();
@@ -14,7 +22,7 @@ const OrderModal = ({ checkout, setCheckout, user, id, productDetails,refetch })
         const name = form.name.value;
         const email = form.email.value;
         const model = form.model.value;
-        
+
         const phone = form.phone.value;
         const location = form.location.value;
         // [3, 4, 5].map((value, i) => console.log(value))
@@ -22,15 +30,15 @@ const OrderModal = ({ checkout, setCheckout, user, id, productDetails,refetch })
             name,
             email,
             model,
-            resalePrice:resale_price,
+            resalePrice: resale_price,
             phone,
             location,
-            picture
+            picture,
         };
 
         console.log(order);
 
-        fetch("http://localhost:5000/orders", {
+        fetch(" https://sellphone-server-mehedi2283.vercel.app/orders", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -44,33 +52,26 @@ const OrderModal = ({ checkout, setCheckout, user, id, productDetails,refetch })
                 if (data.acknowledged) {
                     form.reset();
 
-                  
-
-
-
-
-                    
-                        fetch(`http://localhost:5000/all-products/disable/${_id}`, {
+                    fetch(
+                        ` https://sellphone-server-mehedi2283.vercel.app/all-products/disable/${_id}`,
+                        {
                             method: "PUT",
                             headers: {
-                                authorization: `bearer ${localStorage.getItem("accessToken")}`,
+                                authorization: `bearer ${localStorage.getItem(
+                                    "accessToken"
+                                )}`,
                             },
-                        })
-                            .then((res) => res.json())
-                            .then((data) => {
-                                if (data.modifiedCount > 0) {
-                                    toast.success("Order Placed Successfully");
-                                    refetch();
-                                }
-                            });
-                
-                        // console.log(id);
-                    
-                
+                        }
+                    )
+                        .then((res) => res.json())
+                        .then((data) => {
+                            if (data.modifiedCount > 0) {
+                                toast.success("Order Placed Successfully");
+                                refetch();
+                            }
+                        });
 
-
-
-
+                    // console.log(id);
                 }
             })
             .catch((err) => console.log(err));

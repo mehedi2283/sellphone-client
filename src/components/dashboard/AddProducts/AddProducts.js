@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 import useSellerVerified from "../../../hook/useSellerAdmin";
 import useTitle from "../../../hooks/useTitle";
-import useSeller from './../../../hook/useSeller';
+import useSeller from "./../../../hook/useSeller";
 
 const AddProducts = () => {
     const { user } = useContext(AuthContext);
     useTitle("Add Product");
     const [isSellerVerified, isSellerLoadingrVerified] = useSellerVerified();
-    const [isSeller,] = useSeller(user?.email);
-    console.log('verified seller',isSeller);
+    const [isSeller] = useSeller(user?.email);
+    console.log("verified seller", isSeller);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -32,7 +32,7 @@ const AddProducts = () => {
         const details = form.details.value;
 
         const product = {
-          category_name,
+            category_name,
             email,
             model_name,
             condition,
@@ -50,7 +50,7 @@ const AddProducts = () => {
             isVerified: isSeller,
         };
 
-        fetch("http://localhost:5000/add-products", {
+        fetch(" https://sellphone-server-mehedi2283.vercel.app/add-products", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -79,14 +79,16 @@ const AddProducts = () => {
                 </h3>
                 <div className="my-auto w-10/12 mx-auto">
                     <div className="grid grid-cols-1 my-auto  gap-4 w-full">
-                        <select name="category_name" className="select border-opacity-20 select-primary bg-primary/5 focus:bg-primary/10  w-full   focus:outline-0 focus:border-primary focus:text-primary">
+                        <select
+                            name="category_name"
+                            className="select border-opacity-20 select-primary bg-primary/5 focus:bg-primary/10  w-full   focus:outline-0 focus:border-primary focus:text-primary"
+                        >
                             <option disabled selected>
                                 Select Category
                             </option>
                             <option>Low Budget</option>
                             <option>Entry Level</option>
                             <option>High Budget</option>
-                          
                         </select>
                         {/* <input
                             required

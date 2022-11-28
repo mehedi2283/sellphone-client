@@ -8,37 +8,22 @@ const ProductsByBrand = () => {
     console.log(ProductsByBrand);
     //   const [checkout,setCheckout] = useState(null)
 
-
-
-
-
     // const { data: allProductscollection = [], refetch } = useQuery({
     //     queryKey: ["productsByBrand"],
     //     queryFn: async (params) => {
-    //         const res = await fetch(` http://localhost:5000/productsByBrand/${params.name}`);
+    //         const res = await fetch(`  https://sellphone-server-mehedi2283.vercel.app/productsByBrand/${params.name}`);
     //         const data = await res.json();
     //         return data;
     //     },
     // });
 
-
-   
-
-
-
-
-
-
-
-
-
-
-
     const [productDetails, setProductDetails] = useState({});
     const handleProductDetails = (id) => {
         // setCheckout(productDetails)
 
-        fetch(`http://localhost:5000/all-products/${id}`)
+        fetch(
+            ` https://sellphone-server-mehedi2283.vercel.app/all-products/${id}`
+        )
             .then((res) => res.json())
             .then((data) => setProductDetails(data));
 
@@ -49,8 +34,8 @@ const ProductsByBrand = () => {
     return (
         <div>
             <p className="text-4xl text-center font-bold">
-                {brandsProducts[0].category_name} has total {brandsProducts.length}{" "}
-                products.
+                {brandsProducts[0].category_name} has total{" "}
+                {brandsProducts.length} products.
             </p>
 
             <div className="grid lg:grid-cols-3 justify-items-center mt-4">

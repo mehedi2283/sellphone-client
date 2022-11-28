@@ -38,16 +38,12 @@ const ProductCardForSeller = ({ product, refetch }) => {
         details,
     } = product;
 
-
-   
-
     //picture, name, location, resale price, original price, years of use, the time when it got posted, the seller's name; if the seller is verified, there will be a blue tick next to their name and a Book now button.
 
     const handleSellerProductDelete = (id) => {
         // console.log();
 
-
-        fetch(`http://localhost:5000/sellerProduct/${id}`, {
+        fetch(` https://sellphone-server-mehedi2283.vercel.app/${id}`, {
             method: "DELETE",
             headers: {
                 authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -60,8 +56,7 @@ const ProductCardForSeller = ({ product, refetch }) => {
             });
     };
 
-
-    const advertiseProduct ={
+    const advertiseProduct = {
         _id,
         picture,
         model_name,
@@ -74,45 +69,43 @@ const ProductCardForSeller = ({ product, refetch }) => {
         isVerified,
         isBooked,
         details,
-    }
+    };
 
-    const handleAdvertise = (product) =>{
-
-
+    const handleAdvertise = (product) => {
         // console.log(product);
 
-
-
-        fetch(`http://localhost:5000/advertise/${product._id}`, {
-            method: "PUT",
-            headers: {
-                'content-type': 'application/json',
-                authorization: `bearer ${localStorage.getItem("accessToken")}`,
-            },
-            body: JSON.stringify(advertiseProduct)
-        })
+        fetch(
+            ` https://sellphone-server-mehedi2283.vercel.app/advertise/${product._id}`,
+            {
+                method: "PUT",
+                headers: {
+                    "content-type": "application/json",
+                    authorization: `bearer ${localStorage.getItem(
+                        "accessToken"
+                    )}`,
+                },
+                body: JSON.stringify(advertiseProduct),
+            }
+        )
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
+                console.log(data);
                 if (data.acknowledged) {
                     toast.success("Advertisement Complete");
                     refetch();
-                    
                 }
             });
+    };
 
-    }
-
-
-
-    
     return (
         <div className="card card-compact w-96 bg-base-100 shadow-xl mb-6">
             <figure>
                 <img src={picture} alt={model_name} />
             </figure>
             <div className="card-body">
-                <h2 className="text-2xl font-bold  text-center">{model_name}</h2>
+                <h2 className="text-2xl font-bold  text-center">
+                    {model_name}
+                </h2>
                 <p className="text-center text-base font-medium">
                     Location: {location}
                 </p>
@@ -153,7 +146,10 @@ const ProductCardForSeller = ({ product, refetch }) => {
                             Not Available
                         </button>
                     ) : (
-                        <button onClick={()=>handleAdvertise(product)} className="btn btn-outline border-0 hover:bg-green-600 text-green-600 bg-green-200">
+                        <button
+                            onClick={() => handleAdvertise(product)}
+                            className="btn btn-outline border-0 hover:bg-green-600 text-green-600 bg-green-200"
+                        >
                             Available
                         </button>
                     )}
@@ -166,8 +162,7 @@ const ProductCardForSeller = ({ product, refetch }) => {
                     </label>
                 </div>
             </div>
-            {
-                clickedId &&
+            {clickedId && (
                 <ConfirmationModal
                     title={`Are you sure you want to delete ?`}
                     message={` ${model_name} will be deleted.`}
@@ -176,7 +171,7 @@ const ProductCardForSeller = ({ product, refetch }) => {
                     successButtonName="Delete"
                     modalData={clickedId}
                 ></ConfirmationModal>
-            }
+            )}
         </div>
     );
 };

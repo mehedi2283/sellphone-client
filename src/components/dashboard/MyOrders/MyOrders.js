@@ -6,13 +6,13 @@ import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 const MyOrders = () => {
     const { user } = useContext(AuthContext);
 
-    // const uri = `http://localhost:5000/orders?email=${user?.email}`
+    // const uri = ` https://sellphone-server-mehedi2283.vercel.app/orders?email=${user?.email}`
 
     const { data: orders = [] } = useQuery({
         queryKey: ["orders", user?.email],
         queryFn: async () => {
             const res = await fetch(
-                `http://localhost:5000/orders?email=${user?.email}`,
+                ` https://sellphone-server-mehedi2283.vercel.app/orders?email=${user?.email}`,
                 {
                     headers: {
                         authorization: `bearer ${localStorage.getItem(
@@ -70,27 +70,25 @@ const MyOrders = () => {
                                 </td>
                                 <td>
                                     <span className="badge badge-ghost font-bold">
-                                      $  {order.resalePrice} 
+                                        $ {order.resalePrice}
                                     </span>
                                 </td>
 
                                 <td>
-                                    {
-                                      order.resalePrice && !order.paid &&
+                                    {order.resalePrice && !order.paid && (
                                         <Link
                                             to={`/dashboard/payment/${order._id}`}
                                             className="btn btn-ghost font-bold px-3 bg-blue-200 hover:bg-blue-500 hover:text-white btn-xs"
                                         >
                                             Pay
                                         </Link>
-                                    }
+                                    )}
 
-                                    {
-                                      order.resalePrice && order.paid &&
-                                      <Link className="btn text-white btn-xs btn-disabled  bg-green-500">Paid</Link>
-
-
-                                    }
+                                    {order.resalePrice && order.paid && (
+                                        <Link className="btn text-white btn-xs btn-disabled  bg-green-500">
+                                            Paid
+                                        </Link>
+                                    )}
                                 </td>
                             </tr>
                         ))}

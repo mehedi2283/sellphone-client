@@ -1,25 +1,26 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
-import ProductCard from '../ProductCard/ProductCard';
+import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
+import ProductCard from "../ProductCard/ProductCard";
 
 const HighBudget = () => {
-
     const { data: brandsProducts = [], refetch } = useQuery({
         queryKey: ["sellers"],
         queryFn: async () => {
-            const res = await fetch("http://localhost:5000/productsByBrand/High Budget");
+            const res = await fetch(
+                " https://sellphone-server-mehedi2283.vercel.app/productsByBrand/High Budget"
+            );
             const data = await res.json();
             return data;
         },
     });
 
-
-    
     const [productDetails, setProductDetails] = useState({});
     const handleProductDetails = (id) => {
         // setCheckout(productDetails)
 
-        fetch(`http://localhost:5000/all-products/${id}`)
+        fetch(
+            ` https://sellphone-server-mehedi2283.vercel.app/all-products/${id}`
+        )
             .then((res) => res.json())
             .then((data) => setProductDetails(data));
 

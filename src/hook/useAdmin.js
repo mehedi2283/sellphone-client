@@ -5,15 +5,17 @@ const useAdmin = (email) => {
 
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/admin/${email}`)
+            fetch(
+                ` https://sellphone-server-mehedi2283.vercel.app/admin/${email}`
+            )
                 .then((res) => res.json())
                 .then((data) => {
                     console.log(data);
                     setIsAdmin(data.isAdmin);
-                    setIsAdminLoading(false)
+                    setIsAdminLoading(false);
                 });
         }
     }, [email]);
-    return [isAdmin,isAdminLoading]
+    return [isAdmin, isAdminLoading];
 };
 export default useAdmin;

@@ -4,42 +4,42 @@ import toast from "react-hot-toast";
 import ConfirmationModal from "../../ConfirmationModal/ConfirmationModal";
 
 const Buyers = () => {
-
     const [deletingBuyers, setDeletingbuyers] = useState(null);
 
     const closeModal = () => {
         setDeletingbuyers(null);
     };
 
-    
-
-
-
-    const { data: buyers = [],refetch} = useQuery({
+    const { data: buyers = [], refetch } = useQuery({
         queryKey: ["buyers"],
         queryFn: async () => {
-            const res = await fetch("http://localhost:5000/users-buyers");
+            const res = await fetch(
+                " https://sellphone-server-mehedi2283.vercel.app/users-buyers"
+            );
             const data = await res.json();
             return data;
         },
-
     });
 
-
-    console.log(deletingBuyers)
+    console.log(deletingBuyers);
     const handleDeleteBuyers = (user) => {
         console.log(user);
 
-        fetch(`http://localhost:5000/users/${user._id}`, {
-            method: "DELETE",
-            headers: {
-                authorization: `bearer ${localStorage.getItem("accessToken")}`,
-            },
-        })
+        fetch(
+            ` https://sellphone-server-mehedi2283.vercel.app/users/${user._id}`,
+            {
+                method: "DELETE",
+                headers: {
+                    authorization: `bearer ${localStorage.getItem(
+                        "accessToken"
+                    )}`,
+                },
+            }
+        )
             .then((res) => res.json())
             .then((data) => {
-                toast.success(`Deleted ${user.name} seccessfully `)
-                refetch()
+                toast.success(`Deleted ${user.name} seccessfully `);
+                refetch();
             });
     };
 
@@ -64,30 +64,28 @@ const Buyers = () => {
                             <td>{buyer.email}</td>
 
                             <td>
-
-                            <label
-                                                onClick={() =>
-                                                    setDeletingbuyers(buyer)
-                                                }
-                                                htmlFor="confirmation-modal"
-                                                className=" btn normal-case bg-red-700 border-0 btn-xs "
-                                            >
-                                                Delete
-                                            </label>
-                                
+                                <label
+                                    onClick={() => setDeletingbuyers(buyer)}
+                                    htmlFor="confirmation-modal"
+                                    className=" btn normal-case bg-red-700 border-0 btn-xs "
+                                >
+                                    Delete
+                                </label>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-           {deletingBuyers && <ConfirmationModal
-                            title={`Are you sure you want to delete ?`}
-                            message={` ${deletingBuyers.name} will be deleted.`}
-                            closeModal={closeModal}
-                            successAction={handleDeleteBuyers}
-                            successButtonName="Delete"
-                            modalData={deletingBuyers}
-                        ></ConfirmationModal>}
+            {deletingBuyers && (
+                <ConfirmationModal
+                    title={`Are you sure you want to delete ?`}
+                    message={` ${deletingBuyers.name} will be deleted.`}
+                    closeModal={closeModal}
+                    successAction={handleDeleteBuyers}
+                    successButtonName="Delete"
+                    modalData={deletingBuyers}
+                ></ConfirmationModal>
+            )}
         </div>
     );
 };

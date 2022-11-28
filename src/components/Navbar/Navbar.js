@@ -28,7 +28,7 @@ const Navbar = () => {
     const handleLogOut = () => {
         logOut();
         toast.success("Successfully logged out");
-        navigate("/");
+        navigate("/sign_in");
     };
 
     let prevScrollpos = window.pageYOffset;

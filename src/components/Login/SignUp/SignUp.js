@@ -10,14 +10,12 @@ import useToken from "../../../hook/useToken";
 
 const SignUp = () => {
     useTitle("Register");
-    const [createdUserEmail,setCreatedUserEmail] = useState('')
-    const [token] = useToken(createdUserEmail)
+    const [createdUserEmail, setCreatedUserEmail] = useState("");
+    const [token] = useToken(createdUserEmail);
     const navigate = useNavigate();
-    if(token){
-        navigate('/sign_in')
+    if (token) {
+        navigate("/sign_in");
     }
-
-
 
     const { loading } = useContext(AuthContext);
     const [error, setError] = useState("");
@@ -63,11 +61,10 @@ const SignUp = () => {
             email,
             role,
         };
-        fetch("http://localhost:5000/users", {
+        fetch(" https://sellphone-server-mehedi2283.vercel.app/users", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
-                
             },
             body: JSON.stringify(user),
         })
@@ -79,18 +76,16 @@ const SignUp = () => {
                     logOut();
                     toast.success("Registration Complete");
                     toast.success("Login Now");
-                    
-                    // getUserToken(email)
-                    setCreatedUserEmail(email)
 
-                   
+                    // getUserToken(email)
+                    setCreatedUserEmail(email);
                 }
             })
             .catch((err) => console.log(err));
     };
 
     // const getUserToken = email => {
-    //     fetch(`http://localhost:5000/jwt?email=${email}`)
+    //     fetch(` https://sellphone-server-mehedi2283.vercel.app/jwt?email=${email}`)
     //     .then((res) => res.json())
     //     .then((data) => {
     //         console.log(data)
@@ -205,7 +200,6 @@ const SignUp = () => {
                                         name="role"
                                         value="seller"
                                         className="radio checked:bg-blue-500"
-                                        
                                     />
                                 </label>
                             </div>

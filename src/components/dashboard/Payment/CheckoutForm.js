@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import toast from "react-hot-toast";
-import {  useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ paymentData }) => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const stripe = useStripe();
     const elements = useElements();
     const [cardError, setCardError] = useState("");
@@ -18,14 +17,19 @@ const CheckoutForm = ({ paymentData }) => {
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("http://localhost:5000/create-payment-intent", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                authorization: `bearer ${localStorage.getItem("accessToken")}`,
-            },
-            body: JSON.stringify({ resalePrice }),
-        })
+        fetch(
+            " https://sellphone-server-mehedi2283.vercel.app/create-payment-intent",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `bearer ${localStorage.getItem(
+                        "accessToken"
+                    )}`,
+                },
+                body: JSON.stringify({ resalePrice }),
+            }
+        )
             .then((res) => res.json())
             .then((data) => setClientSecret(data.clientSecret));
     }, [resalePrice]);
@@ -86,7 +90,7 @@ const CheckoutForm = ({ paymentData }) => {
                 bookingId: _id,
             };
 
-            fetch("http://localhost:5000/payments", {
+            fetch(" https://sellphone-server-mehedi2283.vercel.app/payments", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json",
@@ -95,10 +99,9 @@ const CheckoutForm = ({ paymentData }) => {
             })
                 .then((res) => res.json())
                 .then((data) => {
-
                     if (data.acknowledged) {
                         toast.success("Payment successful.");
-                        navigate('/dashboard/myOrder')
+                        navigate("/dashboard/myOrder");
                         // form.reset();
                     }
                 })
@@ -113,7 +116,7 @@ const CheckoutForm = ({ paymentData }) => {
             // };
             // console.log("oayment", payment2);
 
-            // fetch("http://localhost:5000/payments", {
+            // fetch(" https://sellphone-server-mehedi2283.vercel.app/payments", {
             //     method: "POST",
             //     header: {
             //         "Content-Type": "application/json",
