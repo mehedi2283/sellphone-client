@@ -11,7 +11,7 @@ import { AuthContext } from "./../../../context/AuthProvider/AuthProvider";
 import useToken from "../../../hook/useToken";
 
 const SignIn = () => {
-    useTitle("Login");
+    useTitle("SignIn");
     const [error, setError] = useState("");
     const [loginUserEmail, setLoginUserEmail] = useState("");
     const [token] = useToken(loginUserEmail);
@@ -68,7 +68,7 @@ const SignIn = () => {
                     role: "buyer",
                 };
 
-                fetch(" https://sellphone-server-mehedi2283.vercel.app/users", {
+                fetch("http://localhost:5000/users", {
                     method: "POST",
                     headers: {
                         "content-type": "application/json",

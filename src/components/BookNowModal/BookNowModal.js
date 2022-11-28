@@ -38,7 +38,7 @@ const OrderModal = ({
 
         console.log(order);
 
-        fetch(" https://sellphone-server-mehedi2283.vercel.app/orders", {
+        fetch("http://localhost:5000/orders", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -52,17 +52,14 @@ const OrderModal = ({
                 if (data.acknowledged) {
                     form.reset();
 
-                    fetch(
-                        ` https://sellphone-server-mehedi2283.vercel.app/all-products/disable/${_id}`,
-                        {
-                            method: "PUT",
-                            headers: {
-                                authorization: `bearer ${localStorage.getItem(
-                                    "accessToken"
-                                )}`,
-                            },
-                        }
-                    )
+                    fetch(`http://localhost:5000/all-products/disable/${_id}`, {
+                        method: "PUT",
+                        headers: {
+                            authorization: `bearer ${localStorage.getItem(
+                                "accessToken"
+                            )}`,
+                        },
+                    })
                         .then((res) => res.json())
                         .then((data) => {
                             if (data.modifiedCount > 0) {

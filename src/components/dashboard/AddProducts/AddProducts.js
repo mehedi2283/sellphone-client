@@ -50,7 +50,7 @@ const AddProducts = () => {
             isVerified: isSeller,
         };
 
-        fetch(" https://sellphone-server-mehedi2283.vercel.app/add-products", {
+        fetch("http://localhost:5000/add-products", {
             method: "POST",
             headers: {
                 "content-type": "application/json",

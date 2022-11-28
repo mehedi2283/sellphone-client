@@ -9,7 +9,7 @@ import useTitle from "../../../hooks/useTitle";
 import useToken from "../../../hook/useToken";
 
 const SignUp = () => {
-    useTitle("Register");
+    useTitle("SignUp");
     const [createdUserEmail, setCreatedUserEmail] = useState("");
     const [token] = useToken(createdUserEmail);
     const navigate = useNavigate();
@@ -61,7 +61,7 @@ const SignUp = () => {
             email,
             role,
         };
-        fetch(" https://sellphone-server-mehedi2283.vercel.app/users", {
+        fetch("http://localhost:5000/users", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -85,7 +85,7 @@ const SignUp = () => {
     };
 
     // const getUserToken = email => {
-    //     fetch(` https://sellphone-server-mehedi2283.vercel.app/jwt?email=${email}`)
+    //     fetch(`http://localhost:5000/jwt?email=${email}`)
     //     .then((res) => res.json())
     //     .then((data) => {
     //         console.log(data)

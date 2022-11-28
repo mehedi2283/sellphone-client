@@ -43,7 +43,7 @@ const ProductCardForSeller = ({ product, refetch }) => {
     const handleSellerProductDelete = (id) => {
         // console.log();
 
-        fetch(` https://sellphone-server-mehedi2283.vercel.app/${id}`, {
+        fetch(`http://localhost:5000/${id}`, {
             method: "DELETE",
             headers: {
                 authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -74,19 +74,14 @@ const ProductCardForSeller = ({ product, refetch }) => {
     const handleAdvertise = (product) => {
         // console.log(product);
 
-        fetch(
-            ` https://sellphone-server-mehedi2283.vercel.app/advertise/${product._id}`,
-            {
-                method: "PUT",
-                headers: {
-                    "content-type": "application/json",
-                    authorization: `bearer ${localStorage.getItem(
-                        "accessToken"
-                    )}`,
-                },
-                body: JSON.stringify(advertiseProduct),
-            }
-        )
+        fetch(`http://localhost:5000/advertise/${product._id}`, {
+            method: "PUT",
+            headers: {
+                "content-type": "application/json",
+                authorization: `bearer ${localStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify(advertiseProduct),
+        })
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);

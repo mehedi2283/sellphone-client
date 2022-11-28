@@ -6,9 +6,7 @@ const useBuyer = (email) => {
 
     useEffect(() => {
         if (email) {
-            fetch(
-                ` https://sellphone-server-mehedi2283.vercel.app/buyers/${email}`
-            )
+            fetch(`http://localhost:5000/buyers/${email}`)
                 .then((res) => res.json())
                 .then((data) => {
                     // console.log(data);

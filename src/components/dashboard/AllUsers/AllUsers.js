@@ -15,17 +15,12 @@ const AllUsers = () => {
     const handleDeleteSeller = (user) => {
         // console.log(seller);
 
-        fetch(
-            ` https://sellphone-server-mehedi2283.vercel.app/users/${user._id}`,
-            {
-                method: "DELETE",
-                headers: {
-                    authorization: `bearer ${localStorage.getItem(
-                        "accessToken"
-                    )}`,
-                },
-            }
-        )
+        fetch(`http://localhost:5000/users/${user._id}`, {
+            method: "DELETE",
+            headers: {
+                authorization: `bearer ${localStorage.getItem("accessToken")}`,
+            },
+        })
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
@@ -39,26 +34,19 @@ const AllUsers = () => {
     const { data: sellers = [], refetch } = useQuery({
         queryKey: ["sellers"],
         queryFn: async () => {
-            const res = await fetch(
-                " https://sellphone-server-mehedi2283.vercel.app/users-sellers"
-            );
+            const res = await fetch("http://localhost:5000/users-sellers");
             const data = await res.json();
             return data;
         },
     });
 
     const handleVerified = (id) => {
-        fetch(
-            ` https://sellphone-server-mehedi2283.vercel.app/users-sellers/isVerified/${id}`,
-            {
-                method: "PUT",
-                headers: {
-                    authorization: `bearer ${localStorage.getItem(
-                        "accessToken"
-                    )}`,
-                },
-            }
-        )
+        fetch(`http://localhost:5000/users-sellers/isVerified/${id}`, {
+            method: "PUT",
+            headers: {
+                authorization: `bearer ${localStorage.getItem("accessToken")}`,
+            },
+        })
             .then((res) => res.json())
             .then((data) => {
                 if (data.modifiedCount > 0) {

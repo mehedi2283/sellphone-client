@@ -11,8 +11,11 @@ import useBuyer from "./../../hook/useBuyer";
 import { HiChevronDoubleDown } from "react-icons/hi2";
 import useSeller from "../../hook/useSeller";
 import useAdmin from "../../hook/useAdmin";
+import useTitle from "../../hooks/useTitle";
 
 const Home = () => {
+
+    useTitle("Home");
     //  const {user} = useContext(AuthContext)
 
     const { user, loading } = useContext(AuthContext);
@@ -23,7 +26,7 @@ const Home = () => {
     const [advertiseProducts, setAdvertiseProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     useEffect(() => {
-        fetch(` https://sellphone-server-mehedi2283.vercel.app/brands`)
+        fetch(`http://localhost:5000/brands`)
             .then((res) => res.json())
             .then((data) => setCategories(data))
             .catch((err) => console.log(err));
@@ -37,9 +40,7 @@ const Home = () => {
 
     const [productDetails, setProductDetails] = useState([]);
     const handleProductDetails = (id) => {
-        fetch(
-            ` https://sellphone-server-mehedi2283.vercel.app/all-products/${id}`
-        )
+        fetch(`http://localhost:5000/all-products/${id}`)
             .then((res) => res.json())
             .then((data) => setProductDetails(data));
 
@@ -64,7 +65,7 @@ const Home = () => {
     // console.log(advertiseProducts);
 
     useEffect(() => {
-        fetch(` https://sellphone-server-mehedi2283.vercel.app/advrtiseMent`)
+        fetch(`http://localhost:5000/advrtiseMent`)
             .then((res) => res.json())
             .then((data) => setAdvertiseProducts(data))
             .catch((err) => console.log(err));

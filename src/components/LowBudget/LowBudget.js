@@ -1,13 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
+import useTitle from "../../hooks/useTitle";
 import ProductCard from "../ProductCard/ProductCard";
 
 const LowBudget = () => {
+    useTitle("Low Budget");
     const { data: brandsProducts = [], refetch } = useQuery({
         queryKey: ["sellers"],
         queryFn: async () => {
             const res = await fetch(
-                " https://sellphone-server-mehedi2283.vercel.app/productsByBrand/Low Budget"
+                "http://localhost:5000/productsByBrand/Low Budget"
             );
             const data = await res.json();
             return data;
@@ -18,9 +20,7 @@ const LowBudget = () => {
     const handleProductDetails = (id) => {
         // setCheckout(productDetails)
 
-        fetch(
-            ` https://sellphone-server-mehedi2283.vercel.app/all-products/${id}`
-        )
+        fetch(`http://localhost:5000/all-products/${id}`)
             .then((res) => res.json())
             .then((data) => setProductDetails(data));
 

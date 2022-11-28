@@ -2,17 +2,22 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
+import useTitle from "../../../hooks/useTitle";
 
 const MyOrders = () => {
     const { user } = useContext(AuthContext);
 
-    // const uri = ` https://sellphone-server-mehedi2283.vercel.app/orders?email=${user?.email}`
+    // const uri = `http://localhost:5000/orders?email=${user?.email}`
 
+    useTitle("MY Orders");
     const { data: orders = [] } = useQuery({
+
+
+
         queryKey: ["orders", user?.email],
         queryFn: async () => {
             const res = await fetch(
-                ` https://sellphone-server-mehedi2283.vercel.app/orders?email=${user?.email}`,
+                `http://localhost:5000/orders?email=${user?.email}`,
                 {
                     headers: {
                         authorization: `bearer ${localStorage.getItem(
