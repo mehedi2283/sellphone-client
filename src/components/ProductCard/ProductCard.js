@@ -44,10 +44,10 @@ const ProductCard = ({
                 <p className="text-center text-base font-medium">Location: {location}</p>
                 <div className="flex ">
                     <p className="text-center text-base font-medium w-1/2">
-                        Resale Price: {resale_price} tk
+                        Resale Price: <br /> ${resale_price}
                     </p>
                     <p className="text-center text-base font-medium w-1/2">
-                        Original Price: {original_price} tk
+                        Original Price: <br /> ${original_price}
                     </p>
                 </div>
                 <div className="flex ">

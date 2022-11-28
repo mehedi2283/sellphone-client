@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import toast from "react-hot-toast";
+import {  useNavigate } from "react-router-dom";
+
 
 const CheckoutForm = ({ paymentData }) => {
+    const navigate = useNavigate()
     const stripe = useStripe();
     const elements = useElements();
     const [cardError, setCardError] = useState("");
@@ -11,7 +14,7 @@ const CheckoutForm = ({ paymentData }) => {
     const [transactionID, setTransactionID] = useState("");
     const [processing, setProcessing] = useState(false);
 
-    const { resalePrice, name, email } = paymentData;
+    const { resalePrice, name, email, _id } = paymentData;
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
@@ -26,6 +29,8 @@ const CheckoutForm = ({ paymentData }) => {
             .then((res) => res.json())
             .then((data) => setClientSecret(data.clientSecret));
     }, [resalePrice]);
+
+    console.log("clien secret", clientSecret);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -54,7 +59,7 @@ const CheckoutForm = ({ paymentData }) => {
         }
 
         setSuccess("");
-        setProcessing(true)
+        setProcessing(true);
         const { paymentIntent, error: confirmError } =
             await stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
@@ -65,18 +70,72 @@ const CheckoutForm = ({ paymentData }) => {
                     },
                 },
             });
+        console.log("cnfrm errrrooorrr", confirmError);
 
         if (confirmError) {
             setCardError(confirmError.message);
-            setProcessing(false)
+            setProcessing(false);
             return;
         }
         if (paymentIntent.status === "succeeded") {
-            setSuccess("Payment complete.");
-            setTransactionID(paymentIntent.id);
-            toast.success("Payment Complete");
+            const product = {
+                name,
+                email,
+                transactionID: paymentIntent.id,
+                resalePrice,
+                bookingId: _id,
+            };
+
+            fetch("http://localhost:5000/payments", {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify(product),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+
+                    if (data.acknowledged) {
+                        toast.success("Payment successful.");
+                        navigate('/dashboard/myOrder')
+                        // form.reset();
+                    }
+                })
+                .catch((err) => console.error(err));
+
+            // const payment2 = {
+            //     resalePrice:resalePrice,
+            //     name:name,
+            //     transactionID: paymentIntent.id,
+            //     email:email,
+            //     bookingId: _id,
+            // };
+            // console.log("oayment", payment2);
+
+            // fetch("http://localhost:5000/payments", {
+            //     method: "POST",
+            //     header: {
+            //         "Content-Type": "application/json",
+            //         // authorization: `bearer ${localStorage.getItem(
+            //         //     "accessToken"
+            //         // )}`,
+            //     },
+            //     body: JSON.stringify(payment2),
+            // })
+            //     .then((res) => res.json())
+            //     .then((data) => {
+            //         console.log(data);
+            //         setTransactionID(data.id);
+            //         if (data.insertedId) {
+            //             setSuccess("Payment complete.");
+            //             setTransactionID(paymentIntent.id);
+
+            //             toast.success("Payment Complete");
+            //         }
+            //     });
         }
-        setProcessing(false)
+        setProcessing(false);
         //   console.log(paymentIntent)
     };
 
@@ -104,23 +163,27 @@ const CheckoutForm = ({ paymentData }) => {
                     }}
                 />
                 <button
-                    className="btn btn-sm "
+                    className="btn btn-ghost font-black px-9 bg-blue-200 hover:bg-blue-500 hover:text-white "
                     type="submit"
                     disabled={!stripe || !clientSecret || processing}
                 >
                     Pay
                 </button>
             </div>
-            <h2 className="text-center text-2xl text-red-500 mt-9">
+            <h2 className="text-center  text-2xl text-red-500 mt-9">
                 {cardError}
             </h2>
-            {
-                success && <div className="text-center text-2xl pt-9">
-                    <p className="text-green-500 mb-4 font-bold text-4xl">{success}</p>
-                    <p>Your transactionId: <span className="font-bold">{transactionID}</span></p>
+            {success && (
+                <div className="text-center text-2xl pt-9">
+                    <p className="text-green-500 mb-4 font-bold text-4xl">
+                        {success}
+                    </p>
+                    <p>
+                        Your transactionId:{" "}
+                        <span className="font-bold">{transactionID}</span>
+                    </p>
                 </div>
-                
-            }
+            )}
         </form>
     );
 };

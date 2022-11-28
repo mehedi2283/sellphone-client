@@ -23,6 +23,11 @@ const MyProducts = () => {
             return data;
         },
     });
+
+
+
+
+    console.log(myProducts)
     return (
         <div>
             <p>my products {myProducts.length}</p>

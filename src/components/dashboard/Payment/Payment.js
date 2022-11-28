@@ -10,7 +10,7 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 const Payment = () => {
     const paymentData = useLoaderData();
 
-    console.log(paymentData);
+    console.log('helllooo',paymentData);
     return (
         <>
             <div>

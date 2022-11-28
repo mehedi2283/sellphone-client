@@ -70,7 +70,7 @@ const MyOrders = () => {
                                 </td>
                                 <td>
                                     <span className="badge badge-ghost font-bold">
-                                        {order.resalePrice}
+                                      $  {order.resalePrice} 
                                     </span>
                                 </td>
 
@@ -79,7 +79,7 @@ const MyOrders = () => {
                                       order.resalePrice && !order.paid &&
                                         <Link
                                             to={`/dashboard/payment/${order._id}`}
-                                            className="btn btn-ghost bg-blue-200 hover:bg-blue-500 hover:text-white btn-xs"
+                                            className="btn btn-ghost font-bold px-3 bg-blue-200 hover:bg-blue-500 hover:text-white btn-xs"
                                         >
                                             Pay
                                         </Link>

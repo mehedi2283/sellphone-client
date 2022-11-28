@@ -20,6 +20,8 @@ import BuyerRoutes from "../BuyerRoute/BuyerRoute";
 import LowBudget from "./../../components/LowBudget/LowBudget";
 import EntryLevel from "../../components/EntryLevel/EntryLevel";
 import HighBudget from "../../components/HighBudget/HighBudget";
+import Blogs from "../../components/Blogs/Blogs";
+
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -33,6 +35,10 @@ export const routes = createBrowserRouter([
             {
                 path: "/",
                 element: <Home></Home>,
+            },
+            {
+                path: "/blogs",
+                element: <Blogs></Blogs>,
             },
             {
                 path: "/sign_in",
