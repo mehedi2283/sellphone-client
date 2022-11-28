@@ -13,5 +13,5 @@ adminPassword: 123456
 * admin can revove a use and also can verified a seller
 * seller can remove his product
 * wihout buyers nobody can purchase any product
-* use stripe for payment
+* used stripe for payment
 
