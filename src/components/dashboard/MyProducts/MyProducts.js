@@ -31,7 +31,7 @@ const MyProducts = () => {
     console.log(myProducts);
     return (
         <div>
-            <p>my products {myProducts.length}</p>
+            <p className="text-center text-3xl font-bold mb-9">My total products: {myProducts.length}</p>
             <div className=" grid lg:grid-cols-3 md:grid-cols-2">
                 {myProducts.map((product) => (
                     <ProductCardForSeller

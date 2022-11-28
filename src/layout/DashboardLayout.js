@@ -25,32 +25,32 @@ const DashboardLayout = () => {
                     type="checkbox"
                     className="drawer-toggle"
                 />
-                <div className="drawer-content">
+                <div className="drawer-content w-11/12 mx-auto">
                     <Outlet></Outlet>
                 </div>
-                <div className="drawer-side ">
+                <div className="drawer-side border-r-2">
                     <label
                         htmlFor="dashboard-drawer"
                         className="drawer-overlay"
                     ></label>
-                    <ul className="menu p-4 w-80  max-lg:bg-base-100 bg-base-100 text-base-content">
+                    <ul className="menu p-4 w-80  max-lg:bg-base-100 bg-base-100 text-base-content text-center">
                         {/* <!-- Sidebar content here --> */}
                         {
                             isBuyer &&
                             <li>
-                                <Link to="/dashboard/myOrder">My Orders</Link>
+                                <Link className="justify-center font-bold text-xl border-b-2" to="/dashboard/myOrder">My Orders</Link>
                             </li>
                         }
                         {isSeller && (
                             <>
                                 
                                 <li>
-                                    <Link to="/dashboard/MyProducts">
+                                    <Link className="justify-center font-bold text-xl border-b-2" to="/dashboard/MyProducts">
                                         My Products
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/dashboard/addMyProducts">
+                                    <Link className="justify-center font-bold text-xl border-b-2" to="/dashboard/addMyProducts">
                                         Add A Product
                                     </Link>
                                 </li>
@@ -58,7 +58,7 @@ const DashboardLayout = () => {
                         )}
                         {isAdmin && (
                             <li>
-                                <Link to="/dashboard/all-users">All Users</Link>
+                                <Link className="justify-center font-bold text-xl border-b-2" to="/dashboard/all-users">All Users</Link>
                             </li>
                         )}
                     </ul>

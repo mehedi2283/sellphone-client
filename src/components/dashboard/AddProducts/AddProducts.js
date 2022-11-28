@@ -47,7 +47,7 @@ const AddProducts = () => {
             number,
             details,
             ratings: "5",
-            isVerified: isSeller,
+            isVerified: isSellerVerified,
         };
 
         fetch("http://localhost:5000/add-products", {

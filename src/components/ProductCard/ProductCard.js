@@ -35,7 +35,7 @@ const ProductCard = ({
     //picture, name, location, resale price, original price, years of use, the time when it got posted, the seller's name; if the seller is verified, there will be a blue tick next to their name and a Book now button.
 
     return (
-        <div className="card card-compact w-72 max-w- bg-base-100 shadow-xl mb-6">
+        <div className="card card-compact w-96  bg-base-100 shadow-xl mb-6">
             <figure>
                 <img src={picture} alt={name} />
             </figure>

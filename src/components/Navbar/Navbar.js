@@ -41,6 +41,15 @@ const Navbar = () => {
         }
         prevScrollpos = currentScrollPos;
     };
+
+    let activeStyle = {
+        textDecoration: "underline",
+        textDecorationColor: "inherit",
+        textDecorationThickness: "4px",
+        fontWeight: "800",
+        textUnderlineOffset: "5px",
+        // color:"textSecondary"
+    };
     return (
         <div className="navbar bg-base-100 justify-around">
             <div className="">
@@ -66,11 +75,34 @@ const Navbar = () => {
                         className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
                     >
                         <li>
-                            <Link>Item 1</Link>
+                            {user && (
+                                <NavLink
+                                    className=" px-6 justify-center "
+                                    to={`${
+                                        isBuyer
+                                            ? "/dashboard/myOrder"
+                                            : isAdmin
+                                            ? "/dashboard/all-users"
+                                            : "dashboard/MyProducts"
+                                    }`}
+                                >
+                                    <span className="me-2 font-semibold fs-5 text-center ">
+                                        Dashboard
+                                    </span>
+                                </NavLink>
+                            )}
                         </li>
 
                         <li>
-                            <Link>Item 3</Link>
+                            <NavLink
+                                style={({ isActive }) =>
+                                    isActive ? activeStyle : undefined
+                                }
+                                to="blogs "
+                                className="font-semibold justify-center"
+                            >
+                                Blogs
+                            </NavLink>
                         </li>
                     </ul>
                 </div>
@@ -82,14 +114,19 @@ const Navbar = () => {
                 <div className="menu menu-horizontal p-0">
                     {user ? (
                         <div className="flex items-center justify-end gap-2">
-                           
-
                             <NavLink
                                 className=" px-6 "
-                                to={`${isBuyer?'/dashboard/myOrder':isAdmin?'/dashboard/all-users':'dashboard/MyProducts'}`}
-                               
+                                to={`${
+                                    isBuyer
+                                        ? "/dashboard/myOrder"
+                                        : isAdmin
+                                        ? "/dashboard/all-users"
+                                        : "dashboard/MyProducts"
+                                }`}
                             >
-                                <span className="me-2 fs-5 ">Dashboard</span>
+                                <span className="me-2 font-semibold fs-5 ">
+                                    Dashboard
+                                </span>
                             </NavLink>
                             {/* <Link
                             className=" btn btn-primary "
@@ -102,7 +139,15 @@ const Navbar = () => {
                         " "
                     )}
                 </div>
-                <NavLink to='blogs'>Blogs</NavLink>
+                <NavLink
+                    style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                    }
+                    to="blogs "
+                    className="font-semibold"
+                >
+                    Blogs
+                </NavLink>
             </div>
             {/* <div className="navbar-end">
     <Link to='/sign_in' className="btn">Login</Link>

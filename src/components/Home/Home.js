@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useQuery } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -7,10 +7,10 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 // import OrderModal from "../BookNowModal/BookNowModal";
 import ProductCard from "./../ProductCard/ProductCard";
-import useBuyer from "./../../hook/useBuyer";
+// import useBuyer from "./../../hook/useBuyer";
 import { HiChevronDoubleDown } from "react-icons/hi2";
-import useSeller from "../../hook/useSeller";
-import useAdmin from "../../hook/useAdmin";
+// import useSeller from "../../hook/useSeller";
+// import useAdmin from "../../hook/useAdmin";
 import useTitle from "../../hooks/useTitle";
 
 const Home = () => {
