@@ -134,7 +134,7 @@ export const routes = createBrowserRouter([
                 ),
                 loader: ({ params }) =>
                     fetch(
-                        `sellphone-server-mehedi2283.vercel.app/orders/${params.id}`
+                        `https://sellphone-server-mehedi2283.vercel.app/orders/${params.id}`
                     ),
             },
         ],

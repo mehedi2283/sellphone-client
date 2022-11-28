@@ -24,7 +24,7 @@ const Home = () => {
 
     const [categories, setCategories] = useState([]);
     useEffect(() => {
-        fetch(`sellphone-server-mehedi2283.vercel.app/brands`)
+        fetch(`https://sellphone-server-mehedi2283.vercel.app/brands`)
             .then((res) => res.json())
             .then((data) => setCategories(data))
             .catch((err) => console.log(err));
@@ -38,7 +38,9 @@ const Home = () => {
 
     const [productDetails, setProductDetails] = useState([]);
     const handleProductDetails = (id) => {
-        fetch(`sellphone-server-mehedi2283.vercel.app/all-products/${id}`)
+        fetch(
+            `https://sellphone-server-mehedi2283.vercel.app/all-products/${id}`
+        )
             .then((res) => res.json())
             .then((data) => setProductDetails(data));
 
@@ -53,7 +55,7 @@ const Home = () => {
     //     queryKey: ["advertise bal"],
     //     queryFn: async () => {
     //         const res = await fetch(
-    //             "https://sellphone-server-mehedi2283.vercel.app/advrtiseMent"
+    //             "https://https://sellphone-server-mehedi2283.vercel.app/advrtiseMent"
     //         );
     //         const data = await res.json();
     //         return data;
@@ -63,7 +65,7 @@ const Home = () => {
     const [advertiseProducts, setAdvertiseProducts] = useState([]);
 
     useEffect(() => {
-        fetch(`sellphone-server-mehedi2283.vercel.app/advrtiseMent`)
+        fetch(`https://sellphone-server-mehedi2283.vercel.app/advrtiseMent`)
             .then((res) => res.json())
             .then((data) => setAdvertiseProducts(data))
             .catch((err) => console.log(err));

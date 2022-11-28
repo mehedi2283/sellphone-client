@@ -6,7 +6,9 @@ const useSellerVerified = (email) => {
 
     useEffect(() => {
         // if (email) {
-        fetch(`sellphone-server-mehedi2283.vercel.app/sellersVerified/${email}`)
+        fetch(
+            `https://sellphone-server-mehedi2283.vercel.app/sellersVerified/${email}`
+        )
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);

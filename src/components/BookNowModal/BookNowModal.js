@@ -39,7 +39,7 @@ const OrderModal = ({
 
         console.log(order);
 
-        fetch("sellphone-server-mehedi2283.vercel.app/orders", {
+        fetch("https://sellphone-server-mehedi2283.vercel.app/orders", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -54,7 +54,7 @@ const OrderModal = ({
                     form.reset();
 
                     fetch(
-                        `sellphone-server-mehedi2283.vercel.app/all-products/disable/${_id}`,
+                        `https://sellphone-server-mehedi2283.vercel.app/all-products/disable/${_id}`,
                         {
                             method: "PUT",
                             headers: {
@@ -68,7 +68,7 @@ const OrderModal = ({
                         .then((data) => {
                             if (data.modifiedCount > 0) {
                                 fetch(
-                                    `sellphone-server-mehedi2283.vercel.app/advertise/${_id}`,
+                                    `https://sellphone-server-mehedi2283.vercel.app/advertise/${_id}`,
                                     {
                                         method: "DELETE",
                                         headers: {

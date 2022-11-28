@@ -9,7 +9,7 @@ const EntryLevel = () => {
         queryKey: ["sellers"],
         queryFn: async () => {
             const res = await fetch(
-                "sellphone-server-mehedi2283.vercel.app/productsByBrand/Entry Level"
+                "https://sellphone-server-mehedi2283.vercel.app/productsByBrand/Entry Level"
             );
             const data = await res.json();
             return data;
@@ -20,7 +20,9 @@ const EntryLevel = () => {
     const handleProductDetails = (id) => {
         // setCheckout(productDetails)
 
-        fetch(`sellphone-server-mehedi2283.vercel.app/all-products/${id}`)
+        fetch(
+            `https://sellphone-server-mehedi2283.vercel.app/all-products/${id}`
+        )
             .then((res) => res.json())
             .then((data) => setProductDetails(data));
 

@@ -62,7 +62,7 @@ const SignUp = () => {
             role,
             isVerified: "not verifed",
         };
-        fetch("sellphone-server-mehedi2283.vercel.app/users", {
+        fetch("https://sellphone-server-mehedi2283.vercel.app/users", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -86,7 +86,7 @@ const SignUp = () => {
     };
 
     // const getUserToken = email => {
-    //     fetch(`sellphone-server-mehedi2283.vercel.app/jwt?email=${email}`)
+    //     fetch(`https://sellphone-server-mehedi2283.vercel.app/jwt?email=${email}`)
     //     .then((res) => res.json())
     //     .then((data) => {
     //         console.log(data)

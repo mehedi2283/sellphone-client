@@ -17,14 +17,19 @@ const CheckoutForm = ({ paymentData }) => {
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("sellphone-server-mehedi2283.vercel.app/create-payment-intent", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                authorization: `bearer ${localStorage.getItem("accessToken")}`,
-            },
-            body: JSON.stringify({ resalePrice }),
-        })
+        fetch(
+            "https://sellphone-server-mehedi2283.vercel.app/create-payment-intent",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `bearer ${localStorage.getItem(
+                        "accessToken"
+                    )}`,
+                },
+                body: JSON.stringify({ resalePrice }),
+            }
+        )
             .then((res) => res.json())
             .then((data) => setClientSecret(data.clientSecret));
     }, [resalePrice]);
@@ -85,7 +90,7 @@ const CheckoutForm = ({ paymentData }) => {
                 bookingId: _id,
             };
 
-            fetch("sellphone-server-mehedi2283.vercel.app/payments", {
+            fetch("https://sellphone-server-mehedi2283.vercel.app/payments", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json",
@@ -111,7 +116,7 @@ const CheckoutForm = ({ paymentData }) => {
             // };
             // console.log("oayment", payment2);
 
-            // fetch("sellphone-server-mehedi2283.vercel.app/payments", {
+            // fetch("https://sellphone-server-mehedi2283.vercel.app/payments", {
             //     method: "POST",
             //     header: {
             //         "Content-Type": "application/json",

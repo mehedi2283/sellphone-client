@@ -11,7 +11,7 @@ const ProductsByBrand = () => {
     // const { data: allProductscollection = [], refetch } = useQuery({
     //     queryKey: ["productsByBrand"],
     //     queryFn: async (params) => {
-    //         const res = await fetch(` sellphone-server-mehedi2283.vercel.app/productsByBrand/${params.name}`);
+    //         const res = await fetch(` https://sellphone-server-mehedi2283.vercel.app/productsByBrand/${params.name}`);
     //         const data = await res.json();
     //         return data;
     //     },
@@ -21,7 +21,9 @@ const ProductsByBrand = () => {
     const handleProductDetails = (id) => {
         // setCheckout(productDetails)
 
-        fetch(`sellphone-server-mehedi2283.vercel.app/all-products/${id}`)
+        fetch(
+            `https://sellphone-server-mehedi2283.vercel.app/all-products/${id}`
+        )
             .then((res) => res.json())
             .then((data) => setProductDetails(data));
 

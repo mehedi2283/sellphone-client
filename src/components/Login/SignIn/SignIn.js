@@ -68,7 +68,7 @@ const SignIn = () => {
                     role: "buyer",
                 };
 
-                fetch("sellphone-server-mehedi2283.vercel.app/users", {
+                fetch("https://sellphone-server-mehedi2283.vercel.app/users", {
                     method: "POST",
                     headers: {
                         "content-type": "application/json",

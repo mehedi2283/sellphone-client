@@ -7,14 +7,14 @@ import useTitle from "../../../hooks/useTitle";
 const MyOrders = () => {
     const { user } = useContext(AuthContext);
 
-    // const uri = `sellphone-server-mehedi2283.vercel.app/orders?email=${user?.email}`
+    // const uri = `https://sellphone-server-mehedi2283.vercel.app/orders?email=${user?.email}`
 
     useTitle("MY Orders");
     const { data: orders = [] } = useQuery({
         queryKey: ["orders", user?.email],
         queryFn: async () => {
             const res = await fetch(
-                `sellphone-server-mehedi2283.vercel.app/orders?email=${user?.email}`,
+                `https://sellphone-server-mehedi2283.vercel.app/orders?email=${user?.email}`,
                 {
                     headers: {
                         authorization: `bearer ${localStorage.getItem(

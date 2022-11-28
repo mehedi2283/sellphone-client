@@ -15,12 +15,17 @@ const AllUsers = () => {
     const handleDeleteSeller = (user) => {
         // console.log(seller);
 
-        fetch(`sellphone-server-mehedi2283.vercel.app/users/${user._id}`, {
-            method: "DELETE",
-            headers: {
-                authorization: `bearer ${localStorage.getItem("accessToken")}`,
-            },
-        })
+        fetch(
+            `https://sellphone-server-mehedi2283.vercel.app/users/${user._id}`,
+            {
+                method: "DELETE",
+                headers: {
+                    authorization: `bearer ${localStorage.getItem(
+                        "accessToken"
+                    )}`,
+                },
+            }
+        )
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
@@ -35,7 +40,7 @@ const AllUsers = () => {
         queryKey: ["sellers"],
         queryFn: async () => {
             const res = await fetch(
-                "sellphone-server-mehedi2283.vercel.app/users-sellers"
+                "https://sellphone-server-mehedi2283.vercel.app/users-sellers"
             );
             const data = await res.json();
             return data;
@@ -44,7 +49,7 @@ const AllUsers = () => {
 
     const handleVerified = (id) => {
         fetch(
-            `sellphone-server-mehedi2283.vercel.app/users-sellers/isVerified/${id}`,
+            `https://sellphone-server-mehedi2283.vercel.app/users-sellers/isVerified/${id}`,
             {
                 method: "PUT",
                 headers: {

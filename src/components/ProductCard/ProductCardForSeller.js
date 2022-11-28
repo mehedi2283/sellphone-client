@@ -43,12 +43,17 @@ const ProductCardForSeller = ({ product, refetch }) => {
     const handleSellerProductDelete = (id) => {
         // console.log();
 
-        fetch(`sellphone-server-mehedi2283.vercel.app/sellerProduct/${id}`, {
-            method: "DELETE",
-            headers: {
-                authorization: `bearer ${localStorage.getItem("accessToken")}`,
-            },
-        })
+        fetch(
+            `https://sellphone-server-mehedi2283.vercel.app/sellerProduct/${id}`,
+            {
+                method: "DELETE",
+                headers: {
+                    authorization: `bearer ${localStorage.getItem(
+                        "accessToken"
+                    )}`,
+                },
+            }
+        )
             .then((res) => res.json())
             .then((data) => {
                 toast.success(`Deleted ${model_name} seccessfully `);
@@ -75,7 +80,7 @@ const ProductCardForSeller = ({ product, refetch }) => {
         // console.log(product);
 
         fetch(
-            `sellphone-server-mehedi2283.vercel.app/advertise/${product._id}`,
+            `https://sellphone-server-mehedi2283.vercel.app/advertise/${product._id}`,
             {
                 method: "PUT",
                 headers: {

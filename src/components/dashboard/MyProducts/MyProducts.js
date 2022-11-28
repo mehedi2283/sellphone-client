@@ -12,7 +12,7 @@ const MyProducts = () => {
         queryKey: ["orders", user?.email],
         queryFn: async () => {
             const res = await fetch(
-                `sellphone-server-mehedi2283.vercel.app/myProducts?email=${user?.email}`,
+                `https://sellphone-server-mehedi2283.vercel.app/myProducts?email=${user?.email}`,
                 {
                     headers: {
                         authorization: `bearer ${localStorage.getItem(

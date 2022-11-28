@@ -14,7 +14,7 @@ const AllProducts = () => {
         queryKey: ["sellers"],
         queryFn: async () => {
             const res = await fetch(
-                "sellphone-server-mehedi2283.vercel.app/all-products"
+                "https://sellphone-server-mehedi2283.vercel.app/all-products"
             );
             const data = await res.json();
             return data;
@@ -23,7 +23,9 @@ const AllProducts = () => {
 
     const [productDetails, setProductDetails] = useState([]);
     const handleProductDetails = (id) => {
-        fetch(`sellphone-server-mehedi2283.vercel.app/all-products/${id}`)
+        fetch(
+            `https://sellphone-server-mehedi2283.vercel.app/all-products/${id}`
+        )
             .then((res) => res.json())
             .then((data) => setProductDetails(data));
 

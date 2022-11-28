@@ -33,7 +33,9 @@ const ProductCard = ({
 
     const [perProductUser, setPerProductUser] = useState({});
     useEffect(() => {
-        fetch(`sellphone-server-mehedi2283.vercel.app/users?email=${email}`)
+        fetch(
+            `https://sellphone-server-mehedi2283.vercel.app/users?email=${email}`
+        )
             .then((res) => res.json())
             .then((data) => setPerProductUser(data));
     }, [email]);

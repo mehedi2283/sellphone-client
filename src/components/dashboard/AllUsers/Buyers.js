@@ -14,7 +14,7 @@ const Buyers = () => {
         queryKey: ["buyers"],
         queryFn: async () => {
             const res = await fetch(
-                "sellphone-server-mehedi2283.vercel.app/users-buyers"
+                "https://sellphone-server-mehedi2283.vercel.app/users-buyers"
             );
             const data = await res.json();
             return data;
@@ -25,12 +25,17 @@ const Buyers = () => {
     const handleDeleteBuyers = (user) => {
         console.log(user);
 
-        fetch(`sellphone-server-mehedi2283.vercel.app/users/${user._id}`, {
-            method: "DELETE",
-            headers: {
-                authorization: `bearer ${localStorage.getItem("accessToken")}`,
-            },
-        })
+        fetch(
+            `https://sellphone-server-mehedi2283.vercel.app/users/${user._id}`,
+            {
+                method: "DELETE",
+                headers: {
+                    authorization: `bearer ${localStorage.getItem(
+                        "accessToken"
+                    )}`,
+                },
+            }
+        )
             .then((res) => res.json())
             .then((data) => {
                 toast.success(`Deleted ${user.name} seccessfully `);
