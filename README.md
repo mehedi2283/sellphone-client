@@ -1,4 +1,4 @@
-Live Link:
+Live Link: https://sellphone-69598.web.app
 
 
 adminEmail: munsi@gmail.com
