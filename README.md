@@ -1,9 +1,6 @@
 Live Link: https://sellphone-69598.web.app
 
 
-adminEmail: munsi@gmail.com
-
-adminPassword: 123456
 
 
 * dynamic navbar for buyers sellers and admin with dynamic routes
