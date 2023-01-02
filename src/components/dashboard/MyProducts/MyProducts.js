@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import ProductCardForSeller from "./../../ProductCard/ProductCardForSeller";
 import useTitle from "../../../hooks/useTitle";
 
+
 const MyProducts = () => {
     useTitle("MY Products");
     const { user } = useContext(AuthContext);
@@ -12,7 +13,7 @@ const MyProducts = () => {
         queryKey: ["orders", user?.email],
         queryFn: async () => {
             const res = await fetch(
-                `https://sellphone-server-mehedi2283.vercel.app/myProducts?email=${user?.email}`,
+                `http://localhost:5000/myProducts?email=${user?.email}`,
                 {
                     headers: {
                         authorization: `bearer ${localStorage.getItem(
@@ -43,6 +44,7 @@ const MyProducts = () => {
                     ))}
                 </div>
             </div>
+            
         </>
     );
 };

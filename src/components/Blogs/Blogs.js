@@ -5,7 +5,7 @@ const Blogs = () => {
     useTitle("Blogs");
     return (
         <div className=" w-2/3 mx-auto"> 
-            <section className=" mb-9">
+            {/* <section className=" mb-9">
                 <h3 className="text-3xl">
                     What are the different ways to manage a state in a React
                     application?
@@ -59,7 +59,9 @@ const Blogs = () => {
                     flaws in code which may be more difficult to find in later
                     testing stages.
                 </p>
-            </section>
+            </section> */}
+
+            <h1 className="text-6xl flex justify-center items-center">comming soon...</h1>
         </div>
     );
 };
