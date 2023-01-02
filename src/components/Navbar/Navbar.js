@@ -288,6 +288,7 @@ const Navbar = () => {
                                 </li>
 
                                 <li>
+                                {user && (
                                     <NavLink
                                         style={({ isActive }) =>
                                             isActive ? activeStyle : undefined
@@ -297,6 +298,7 @@ const Navbar = () => {
                                     >
                                         Blogs
                                     </NavLink>
+                                    )}
                                 </li>
                             </ul>
                         </div>

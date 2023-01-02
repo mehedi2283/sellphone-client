@@ -21,6 +21,7 @@ import LowBudget from "./../../components/LowBudget/LowBudget";
 import EntryLevel from "../../components/EntryLevel/EntryLevel";
 import HighBudget from "../../components/HighBudget/HighBudget";
 import Blogs from "../../components/Blogs/Blogs";
+import About from "../../components/About/About";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -76,6 +77,14 @@ export const routes = createBrowserRouter([
                 element: (
                     <PrivateRoutes>
                         <HighBudget></HighBudget>
+                    </PrivateRoutes>
+                ),
+            },
+            {
+                path: "/profile",
+                element: (
+                    <PrivateRoutes>
+                        <About></About>
                     </PrivateRoutes>
                 ),
             },

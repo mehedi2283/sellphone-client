@@ -76,7 +76,7 @@ const SignUp = () => {
                     // form.reset();
                     logOut();
                     toast.success("Registration Complete");
-                    toast.success("Login Now");
+                    toast.success("Please verify your email and Login");
 
                     // getUserToken(email)
                     setCreatedUserEmail(email);

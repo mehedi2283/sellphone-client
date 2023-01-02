@@ -69,6 +69,26 @@ const ProductCardForSeller = ({ product, refetch }) => {
             .then((res) => res.json())
             .then((data) => {
                 toast.success(`Deleted ${model_name} seccessfully `);
+                fetch(
+                    `https://sellphone-server-mehedi2283.vercel.app/advertise/${_id}`,
+                    {
+                        method: "DELETE",
+                        headers: {
+                            authorization: `bearer ${localStorage.getItem(
+                                "accessToken"
+                            )}`,
+                        },
+                    }
+                )
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+                        toast.success(
+                            "Order Placed Successfully"
+                        );
+
+                        refetch();
+                    });
                 refetch();
             });
     };
@@ -163,10 +183,10 @@ const ProductCardForSeller = ({ product, refetch }) => {
                             <span className="normal-case"> Sellers Name</span>:{" "}
                             {seller_name}{" "}
                         </h2>
-                        {!perProductUser.isVerified === "verified" ? (
-                            <GoUnverified className="text-xl"></GoUnverified>
-                        ) : (
+                        {perProductUser.isVerified === "verified" ? (
                             <GoVerified className="text-xl text-blue-500"></GoVerified>
+                        ) : (
+                            <GoUnverified className="text-xl"></GoUnverified>
                         )}
                     </div>
                     <p className="divider text-lg font-semibold">Status</p>

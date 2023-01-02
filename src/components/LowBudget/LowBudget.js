@@ -7,7 +7,7 @@ import ProductCard from "../ProductCard/ProductCard";
 const LowBudget = () => {
     useTitle("Low Budget");
     const { search } = useContext(AuthContext);
-    const { data: brandsProducts = [], refetch } = useQuery({
+    const { data: brandsProducts = [], refetch,isLoading } = useQuery({
         queryKey: ["sellers"],
         queryFn: async () => {
             const res = await fetch(
@@ -33,10 +33,28 @@ const LowBudget = () => {
     };
     console.log(productDetails);
 
+    if(isLoading){
+        return (
+            <div className="border my-72 border-primary shadow rounded-md p-4 max-w-sm w-full mx-auto">
+                <div className="animate-pulse flex space-x-4">
+                    <div className="rounded-full bg-primary h-12 w-12"></div>
+                    <div className="flex-1 space-y-4 py-1">
+                        <div className="h-4 bg-primary rounded w-3/4"></div>
+                        <div className="space-y-2">
+                            <div className="h-4 bg-primary rounded"></div>
+                            <div className="h-4 bg-primary rounded w-5/6"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+    }
+
     return (
         <div>
             <p className="text-4xl text-center font-bold">
-                {/* {brandsProducts[0].category_name} has total {brandsProducts.length}{" "} */}
+                {brandsProducts[0].category_name} has total {brandsProducts.length}{" "}
                 products.
             </p>
 
