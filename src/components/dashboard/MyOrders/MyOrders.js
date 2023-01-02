@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 import useTitle from "../../../hooks/useTitle";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const MyOrders = () => {
     const { user } = useContext(AuthContext);
@@ -57,7 +58,7 @@ const MyOrders = () => {
                                     <div className="flex items-center space-x-3">
                                         <div className="avatar">
                                             <div className="mask mask-squircle w-12 h-12">
-                                                <img
+                                                <LazyLoadImage
                                                     src={order.picture}
                                                     alt="Avatar Tailwind CSS Component"
                                                 />

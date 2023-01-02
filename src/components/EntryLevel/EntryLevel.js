@@ -1,20 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import useTitle from "../../hooks/useTitle";
 import ProductCard from "../ProductCard/ProductCard";
 
 const EntryLevel = () => {
     useTitle("Entry Level");
+    const { search } = useContext(AuthContext);
     const { data: brandsProducts = [], refetch } = useQuery({
         queryKey: ["sellers"],
         queryFn: async () => {
             const res = await fetch(
-                "https://sellphone-server-mehedi2283.vercel.app/productsByBrand/Entry Level"
+                `https://sellphone-server-mehedi2283.vercel.app/productsByBrand/Entry Level?search=${search}`
             );
             const data = await res.json();
             return data;
         },
     });
+    refetch();
 
     const [productDetails, setProductDetails] = useState({});
     const handleProductDetails = (id) => {

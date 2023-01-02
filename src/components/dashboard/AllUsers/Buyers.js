@@ -10,7 +10,11 @@ const Buyers = () => {
         setDeletingbuyers(null);
     };
 
-    const { data: buyers = [], refetch } = useQuery({
+    const {
+        data: buyers = [],
+        refetch,
+        isFetching,
+    } = useQuery({
         queryKey: ["buyers"],
         queryFn: async () => {
             const res = await fetch(
@@ -57,23 +61,33 @@ const Buyers = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {buyers.map((buyer, i) => (
-                        <tr key={buyer._id}>
-                            <th>{i + 1}</th>
-                            <td>{buyer.name}</td>
-                            <td>{buyer.email}</td>
+                    {buyers.map((buyer, i) =>
+                        isFetching ? (
+                            <>
+                                {" "}
+                                <tr className="">
+                                    <progress className="progress w-96 translate-x-1/2  "></progress>
+                                </tr>{" "}
+                                <br />
+                            </>
+                        ) : (
+                            <tr key={buyer._id}>
+                                <th>{i + 1}</th>
+                                <td>{buyer.name}</td>
+                                <td>{buyer.email}</td>
 
-                            <td>
-                                <label
-                                    onClick={() => setDeletingbuyers(buyer)}
-                                    htmlFor="confirmation-modal"
-                                    className=" btn normal-case bg-red-700 border-0 btn-xs "
-                                >
-                                    Delete
-                                </label>
-                            </td>
-                        </tr>
-                    ))}
+                                <td>
+                                    <label
+                                        onClick={() => setDeletingbuyers(buyer)}
+                                        htmlFor="confirmation-modal"
+                                        className=" btn normal-case text-white bg-red-700 border-0 btn-xs "
+                                    >
+                                        Delete
+                                    </label>
+                                </td>
+                            </tr>
+                        )
+                    )}
                 </tbody>
             </table>
             {deletingBuyers && (

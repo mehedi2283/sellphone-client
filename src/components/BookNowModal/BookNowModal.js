@@ -14,7 +14,7 @@ const OrderModal = ({
     const { model_name, resale_price, picture, _id } =
         productDetails.productDetails;
 
-    console.log(resale_price);
+    // console.log(resale_price);
 
     const handleOrder = (event) => {
         event.preventDefault();
@@ -37,7 +37,7 @@ const OrderModal = ({
             orderID: _id,
         };
 
-        console.log(order);
+        // console.log(order);
 
         fetch("https://sellphone-server-mehedi2283.vercel.app/orders", {
             method: "POST",
@@ -49,7 +49,7 @@ const OrderModal = ({
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 if (data.acknowledged) {
                     form.reset();
 

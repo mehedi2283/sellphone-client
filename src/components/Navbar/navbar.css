@@ -1,0 +1,63 @@
+@media only screen and (max-width: 1650px) {
+    .search {
+        width: 70%;
+      
+    }
+}
+.navLink{
+    /* text-decoration: underline; */
+    text-decoration-thickness: 2px; 
+    animation-duration: .5s;
+    
+}
+@media only screen and (min-width: 1450px) {
+    .responsiveNav {
+        padding-left: 15%;
+        padding-right: 15%;
+      
+    }
+}
+@media only screen and (max-width: 1450px) {
+    .responsiveNav {
+        padding-left: 10%;
+        padding-right: 10%;
+      
+    }
+}
+@media only screen and (max-width: 1180px) {
+    .responsiveNav {
+        padding-left: 8%;
+        padding-right: 8%;
+
+      
+    }
+    .searchBtn{
+        padding: 10px;
+    }
+}
+    
+@media only screen and (max-width: 1650px) {
+    .search {
+        width: 40%;
+      
+    }
+}
+@media only screen and (min-width: 975px) {
+
+    
+    .searchDiv {
+        padding: 0 0 0 11rem;
+      
+    }
+}
+
+
+
+    
+@media only screen and (min-width: 960px) and (max-width: 973px) {
+    .search {
+        width: 38%;
+      
+    }
+  }
+  

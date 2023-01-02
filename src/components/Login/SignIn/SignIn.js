@@ -9,6 +9,7 @@ import { FaGoogle } from "react-icons/fa";
 import useTitle from "../../../hooks/useTitle";
 import { AuthContext } from "./../../../context/AuthProvider/AuthProvider";
 import useToken from "../../../hook/useToken";
+import { Input } from "@material-tailwind/react";
 
 const SignIn = () => {
     useTitle("SignIn");
@@ -30,7 +31,7 @@ const SignIn = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.pass.value;
-        // console.log(email,password);
+        console.log(email, password);
 
         signIn(email, password)
             .then((result) => {
@@ -127,52 +128,51 @@ const SignIn = () => {
                 <div className="hero-content flex ">
                     <form
                         onSubmit={handleSubmit}
-                        className="card flex-shrink-0  lg:max-w-sm shadow-2xl bg-base-100"
+                        className="card flex-shrink-0 z-50 lg:max-w-sm shadow-2xl bg-base-100 bg-opacity-40"
                     >
                         <div className="card-body rounded-2xl">
-                            <h1 className="text-center mx-auto mt-4 text-5xl font-bold">
-                                Login now
+                            <h1 className="text-center mx-auto my-7 text-5xl font-bold">
+                                Sign In
                             </h1>
-                            <div className="form-control">
-                                <label className="label">
+                            <div className="form-control my-5">
+                                {/* <label className="label">
                                     <span className="label-text ">Email</span>
-                                </label>
-                                <input
+                                </label> */}
+                                <Input
+                                    label="Email"
+                                    icon={<i className="fas fa-heart" />}
+                                    color="purple"
                                     type="text"
-                                    placeholder="email"
-                                    className="input input-bordered focus:bg-primary/30 text-primary border-primary  w-full bg-primary/5 focus:outline-0"
+                                    className=" text-purple-400  w-full focus:outline-0"
                                     name="email"
                                 />
                             </div>
                             <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text ">
-                                        Password
-                                    </span>
-                                </label>
-                                <input
+                                <Input
+                                    label="Password"
+                                    icon={<i className="fas fa-heart" />}
+                                    color="purple"
                                     type="password"
-                                    placeholder="password"
-                                    className="input input-bordered text-primary focus:bg-primary/30 border-primary  w-full bg-primary/5 focus:outline-0"
+                                    className=" text-purple-400  w-full focus:outline-0"
                                     name="pass"
                                 />
                                 <p className=" text-red-700">{error}</p>
                             </div>
                             <div className="form-control mt-6">
                                 <input
-                                    className="btn btn-primary"
+                                    className="btn btn-primary text-white"
                                     type="submit"
-                                    value="Login"
+                                    value="Sign In"
                                 />
                                 <h1 className="text-2xl font-bold text-center divider divider-vertical">
                                     or
                                 </h1>
                                 <button
                                     onClick={handleGoogleSignIn}
-                                    className="mb-4  border-0 btn flex gap-4 bg-blue-600 normal-case font-bold text-lg"
+                                    className="mb-4  border-0 btn flex gap-4 bg-blue-500 hover:bg-blue-700 text-white normal-case font-bold text-lg"
                                     variant="outline-primary"
                                 >
-                                    <FaGoogle></FaGoogle> SignIn with Google
+                                    <FaGoogle></FaGoogle> Sign_In with Google
                                 </button>
                             </div>
                             <label className="label">

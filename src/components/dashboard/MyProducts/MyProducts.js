@@ -28,20 +28,22 @@ const MyProducts = () => {
 
     console.log(myProducts);
     return (
-        <div>
-            <p className="text-center text-3xl font-bold mb-9">
-                My total products: {myProducts.length}
-            </p>
-            <div className=" grid lg:grid-cols-3 md:grid-cols-2">
-                {myProducts.map((product) => (
-                    <ProductCardForSeller
-                        key={product._id}
-                        product={product}
-                        refetch={refetch}
-                    ></ProductCardForSeller>
-                ))}
+        <>
+            <div className="mt-20">
+                <p className="text-center text-3xl font-bold mb-9">
+                    My total products: {myProducts.length}
+                </p>
+                <div className=" grid lg:grid-cols-3 md:grid-cols-2 mx-auto justify-items-center">
+                    {myProducts.map((product) => (
+                        <ProductCardForSeller
+                            key={product._id}
+                            product={product}
+                            refetch={refetch}
+                        ></ProductCardForSeller>
+                    ))}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

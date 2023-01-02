@@ -1,20 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import useTitle from "../../hooks/useTitle";
 import ProductCard from "../ProductCard/ProductCard";
 
 const HighBudget = () => {
     useTitle("High Budget");
+
+    const { search } = useContext(AuthContext);
     const { data: brandsProducts = [], refetch } = useQuery({
         queryKey: ["sellers"],
         queryFn: async () => {
             const res = await fetch(
-                "https://sellphone-server-mehedi2283.vercel.app/productsByBrand/High Budget"
+                `https://sellphone-server-mehedi2283.vercel.app/productsByBrand/High Budget?search=${search}`
             );
             const data = await res.json();
             return data;
         },
     });
+    refetch();
 
     const [productDetails, setProductDetails] = useState({});
     const handleProductDetails = (id) => {

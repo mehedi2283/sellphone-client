@@ -19,6 +19,13 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
+  const [totalLow, setTotalLow] = useState(null);
+  const [totalEntry, setTotalEntry] = useState(null);
+  const [totalHigh, setTotalHigh] = useState(null);
+  const [totalAll, setTotalAll] = useState(null);
+
+  console.log(totalLow,totalEntry,totalHigh,totalAll)
 
   const providerLogin = (provider) => {
     setLoading(true);
@@ -61,9 +68,21 @@ const AuthProvider = ({ children }) => {
   
   
 
+  
+
   const authInfo = {
     user,
     loading,
+    search,
+    totalLow,
+    totalEntry,
+    totalHigh,
+    totalAll,
+    setTotalAll,
+    setTotalHigh,
+    setTotalEntry,
+    setTotalLow,
+    setSearch,
     setLoading,
     providerLogin,
     logOut,

@@ -1,26 +1,30 @@
 import React, { useContext } from "react";
-// import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-// import AdvertiseProductCard from "../AdvertiseProductCard/AdvertiseProductCard";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
-// import OrderModal from "../BookNowModal/BookNowModal";
+import { useState } from "react";
 import ProductCard from "./../ProductCard/ProductCard";
-// import useBuyer from "./../../hook/useBuyer";
 import { HiChevronDoubleDown } from "react-icons/hi2";
+import useTitle from "../../hooks/useTitle";
+import { useQuery } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query";
+// import AdvertiseProductCard from "../AdvertiseProductCard/AdvertiseProductCard";
+// import OrderModal from "../BookNowModal/BookNowModal";
+// import useBuyer from "./../../hook/useBuyer";
 // import useSeller from "../../hook/useSeller";
 // import useAdmin from "../../hook/useAdmin";
-import useTitle from "../../hooks/useTitle";
+// import HomeHero1 from "./HomeHero1";
 
 const Home = () => {
     useTitle("Home");
     //  const {user} = useContext(AuthContext)
 
-    const { user, loading } = useContext(AuthContext);
+    // const { user,  } = useContext(AuthContext);
     // const [isBuyer] = useBuyer(user?.email)
     // const [isSeller] = useSeller(user?.email)
     // const [isAdmin] = useAdmin(user?.email)
+
+    const { loading } = useContext(AuthContext);
 
     const [categories, setCategories] = useState([]);
     useEffect(() => {
@@ -91,82 +95,91 @@ const Home = () => {
     }
 
     return (
-        <div className="grid md:grid-cols-12">
-            <div className="grid mx-auto  md:col-span-2 ">
-                <div className="flex md:flex-col md:items-start py-20 gap-2 ">
-                    {categories.map((brand) => (
-                        <Link
-                            // category={brand.category_name}
-                            to={`/productsByBrand/${brand.category_name}`}
-                            // onClick={() => handleBrandProducts(brand.category_name)}
-                            key={brand._id}
-                            className="btn btn-primary mr-4 md:w-full"
-                        >
-                            {brand.category_name}
-                        </Link>
-                    ))}
-                    <Link
-                        to="/all-products"
-                        className="btn btn-primary md:w-full"
-                    >
-                        All products
-                    </Link>
-                </div>
-            </div>
-
-            <div className="mt-10 md:col-span-10 ">
-                <div className="hero w-2/3 translate-x-20 mb-6">
-                    <div className="hero-content text-center">
-                        <div className="max-w-md">
-                            <h1 className="text-5xl font-bold">
-                                Welcome to SellPhone
-                            </h1>
-                            <p className="py-6 text-2xl font-medium">
-                                Thanks for visiting our website. <br />
-                                Please check our products.
-                            </p>
-                            <div className=" duration-300 animate-bounce">
-                                <p className="hover:text-white btn-circle btn-primary transition btn btn-outline">
-                                    <HiChevronDoubleDown className="h-6 w-6 text-center " />
-                                </p>
-                            </div>
+        <>
+            <div className="grid md:grid-cols-12">
+                <div className="grid mx-auto  md:col-span-2 ">
+                    <div className="flex flex-col md:items-start py-20 gap-2 z-10">
+                        {categories.map((brand) => (
                             <Link
-                                to="/all-products"
-                                className="btn btn-primary"
+                                // category={brand.category_name}
+                                to={`/productsByBrand/${brand.category_name}`}
+                                // onClick={() => handleBrandProducts(brand.category_name)}
+                                key={brand._id}
+                                className="btn btn-primary btn-outline text-white mr-4 md:w-full hover:scale-110 duration-900"
                             >
-                                Visit Products
+                                {brand.category_name}
                             </Link>
-                        </div>
+                        ))}
+                        <Link
+                            to="/all-products"
+                            className="btn btn-primary  md:w-full text-white hover:scale-110"
+                        >
+                            All products
+                        </Link>
                     </div>
                 </div>
 
-                {
-                    // eslint-disable-next-line no-mixed-operators
-
-                    <div
-                        className={`${
-                            advertiseProducts.length > 0 ? " " : "hidden"
-                        }`}
-                    >
-                        <h1 className="text-5xl -translate-x-44 text-center font-bold ">
-                            Featured Products {advertiseProducts.length}
-                        </h1>
-                        <div className="border mt-4 p-5 w-11/12 grid md:grid-cols-3">
-                            {advertiseProducts.map((product) => (
-                                <ProductCard
-                                    handleProductDetails={handleProductDetails}
-                                    setProductDetails={setProductDetails}
-                                    productDetails={{ productDetails }}
-                                    product={product}
-                                    key={product._id}
-                                    // refetch={refetch}
-                                ></ProductCard>
-                            ))}
+                <div className="mt-10 md:col-span-10 ">
+                    <div className="hero w-2/3 translate-x-20 mb-6">
+                        <div className="hero-content text-center">
+                            <div className="max-w-md">
+                                <h1 className="text-5xl font-bold">
+                                    Welcome to SellPhone
+                                </h1>
+                                <p className="py-6 text-2xl font-medium">
+                                    Thanks for visiting our website. <br />
+                                    Please check our products.
+                                </p>
+                                <div className=" duration-300 animate-bounce">
+                                    <p className="hover:text-white btn-circle btn-primary transition btn btn-outline">
+                                        <HiChevronDoubleDown className="h-6 w-6 text-center " />
+                                    </p>
+                                </div>
+                                <Link
+                                    to="/all-products"
+                                    className="btn btn-primary text-white hover:scale-110"
+                                >
+                                    Visit Products
+                                </Link>
+                            </div>
                         </div>
                     </div>
-                }
+                </div>
             </div>
-        </div>
+
+            <div
+                className={`mt-10 pt-3 ${
+                    advertiseProducts.length > 0 ? " " : "hidden"
+                }`}
+            >
+                <h1
+                    path="/featured"
+                    className=" text-3xl md:text-4xl  mb-6 divider  text-center font-bold "
+                >
+                    Featured Products{" "}
+                    <span className="indicator">
+                        {" "}
+                        <span className="indicator-item badge -translate-y-6">
+                            {" "}
+                            {advertiseProducts.length}
+                        </span>
+                    </span>
+                </h1>
+                <div className=" justify-items-center w-full grid  sm:grid-cols-2 lg:grid-cols-3">
+                    {advertiseProducts.map((product) => (
+                        <ProductCard
+                            handleProductDetails={handleProductDetails}
+                            setProductDetails={setProductDetails}
+                            productDetails={{ productDetails }}
+                            product={product}
+                            key={product._id}
+                            // refetch={refetch}
+                        ></ProductCard>
+                    ))}
+                </div>
+                <div className="divider"></div>
+            </div>
+        </>
     );
 };
 

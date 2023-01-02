@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { GoUnverified, GoVerified } from "react-icons/go";
 import OrderModal from "../BookNowModal/BookNowModal";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import { AuthContext } from "./../../context/AuthProvider/AuthProvider";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const ProductCardForSeller = ({ product, refetch }) => {
     const { user } = useContext(AuthContext);
@@ -14,7 +16,7 @@ const ProductCardForSeller = ({ product, refetch }) => {
     const getId = (id) => {
         setClickedId(id);
     };
-    console.log("set id", clickedId);
+    console.log(product);
 
     const closeModal = () => {
         setClickedId(null);
@@ -25,6 +27,7 @@ const ProductCardForSeller = ({ product, refetch }) => {
 
     const {
         _id,
+        email,
         picture,
         model_name,
         location,
@@ -37,6 +40,15 @@ const ProductCardForSeller = ({ product, refetch }) => {
         isBooked,
         details,
     } = product;
+
+    const [perProductUser, setPerProductUser] = useState({});
+    useEffect(() => {
+        fetch(
+            `https://sellphone-server-mehedi2283.vercel.app/users?email=${email}`
+        )
+            .then((res) => res.json())
+            .then((data) => setPerProductUser(data));
+    }, [email]);
 
     //picture, name, location, resale price, original price, years of use, the time when it got posted, the seller's name; if the seller is verified, there will be a blue tick next to their name and a Book now button.
 
@@ -63,6 +75,7 @@ const ProductCardForSeller = ({ product, refetch }) => {
 
     const advertiseProduct = {
         _id,
+        email,
         picture,
         model_name,
         location,
@@ -77,7 +90,7 @@ const ProductCardForSeller = ({ product, refetch }) => {
     };
 
     const handleAdvertise = (product) => {
-        // console.log(product);
+        console.log(product);
 
         fetch(
             `https://sellphone-server-mehedi2283.vercel.app/advertise/${product._id}`,
@@ -103,81 +116,99 @@ const ProductCardForSeller = ({ product, refetch }) => {
     };
 
     return (
-        <div className="card card-compact w-96 bg-base-100 shadow-xl mb-6">
-            <figure>
-                <img src={picture} alt={model_name} />
-            </figure>
-            <div className="card-body">
-                <h2 className="text-2xl font-bold  text-center">
-                    {model_name}
-                </h2>
-                <p className="text-center text-base font-medium">
-                    Location: {location}
-                </p>
-                <div className="flex ">
-                    <p className="text-center text-base font-medium w-1/2">
-                        Resale Price: {resale_price} tk
-                    </p>
-                    <p className="text-center text-base font-medium w-1/2">
-                        Original Price: {original_price} tk
-                    </p>
-                </div>
-                <div className="flex ">
-                    <p className="text-center text-base font-medium w-1/2">
-                        Years of use: {years_of_use} years
-                    </p>
-                    <p className="text-center text-base font-medium w-1/2">
-                        Post date: {posted_time}{" "}
-                    </p>
-                </div>
-                <div className="flex justify-center gap-2 items-center">
-                    <h2 className="text-center text-lg font-bold uppercase">
-                        <span className="normal-case"> Sellers Name</span>:{" "}
-                        {seller_name}{" "}
+        <>
+            <div
+                data-aos="fade-up"
+                className="boxShadow rounded-md card card-compact w-80  my-14 border border-primary/50 bg-primary/5 "
+            >
+                <figure>
+                    <LazyLoadImage
+                        effect="blur"
+                        className="m-4 rounded-md"
+                        src={picture}
+                        alt={model_name}
+                        style={{
+                            height: "20vh",
+                            objectFit: "cover",
+                            width: "full",
+                        }}
+                    />
+                </figure>
+                <div className="card-body">
+                    <h2 className="text-2xl font-bold  text-center">
+                        {model_name}
                     </h2>
-                    {!isVerified ? (
-                        <GoUnverified className="text-xl"></GoUnverified>
-                    ) : (
-                        <GoVerified className="text-xl text-blue-500"></GoVerified>
-                    )}
-                </div>
-                <p className="divider text-lg font-semibold">Status</p>
-                <div className="flex justify-around">
-                    {isBooked === "booked" ? (
-                        <button
-                            disabled
-                            className="btn  btn-outline border-0 hover:bg-green-600 text-green-600 bg-green-200"
+                    <p className="text-center text-base font-medium">
+                        Location: {location}
+                    </p>
+                    <hr />
+                    <div className="flex ">
+                        <p className="text-center text-base font-medium w-1/2">
+                            Resale Price: <br /> ${resale_price}
+                        </p>
+                        <p className="text-center text-base font-medium w-1/2">
+                            Original Price: <br /> ${original_price}
+                        </p>
+                    </div>
+                    <div className="flex ">
+                        <p className="text-center text-base font-medium w-1/2">
+                            Years of use: {years_of_use} years
+                        </p>
+                        <p className="text-center text-base font-medium w-1/2">
+                            Post date: {posted_time}{" "}
+                        </p>
+                    </div>
+                    <div className="flex justify-center gap-2 items-center">
+                        <h2 className="text-center text-lg font-bold uppercase">
+                            <span className="normal-case"> Sellers Name</span>:{" "}
+                            {seller_name}{" "}
+                        </h2>
+                        {!perProductUser.isVerified === "verified" ? (
+                            <GoUnverified className="text-xl"></GoUnverified>
+                        ) : (
+                            <GoVerified className="text-xl text-blue-500"></GoVerified>
+                        )}
+                    </div>
+                    <p className="divider text-lg font-semibold">Status</p>
+                    <div className="flex justify-around">
+                        {isBooked === "booked" ? (
+                            <button
+                                disabled
+                                className="btn  btn-outline border-0 hover:bg-green-600 text-green-600 bg-green-200"
+                            >
+                                Booked
+                            </button>
+                        ) : (
+                            <button
+                                onClick={() => handleAdvertise(product)}
+                                className="btn btn-outline border-0 hover:bg-green-600 text-green-600 bg-green-200/20"
+                            >
+                                Available
+                            </button>
+                        )}
+                        <label
+                            onClick={() => getId(_id)}
+                            htmlFor="confirmation-modal"
+                            className="btn btn-outline border-0 hover:bg-red-600 text-red-600 bg-red-200/20"
                         >
-                            Booked
-                        </button>
-                    ) : (
-                        <button
-                            onClick={() => handleAdvertise(product)}
-                            className="btn btn-outline border-0 hover:bg-green-600 text-green-600 bg-green-200"
-                        >
-                            Available
-                        </button>
-                    )}
-                    <label
-                        onClick={() => getId(_id)}
-                        htmlFor="confirmation-modal"
-                        className="btn btn-outline border-0 hover:bg-red-600 text-red-600 bg-red-200"
-                    >
-                        Delete
-                    </label>
+                            Delete
+                        </label>
+                    </div>
                 </div>
             </div>
-            {clickedId && (
-                <ConfirmationModal
-                    title={`Are you sure you want to delete ?`}
-                    message={` ${model_name} will be deleted.`}
-                    closeModal={closeModal}
-                    successAction={handleSellerProductDelete}
-                    successButtonName="Delete"
-                    modalData={clickedId}
-                ></ConfirmationModal>
-            )}
-        </div>
+            <div className=" absolute">
+                {clickedId && (
+                    <ConfirmationModal
+                        title={`Are you sure you want to delete ?`}
+                        message={` ${model_name} will be deleted.`}
+                        closeModal={closeModal}
+                        successAction={handleSellerProductDelete}
+                        successButtonName="Delete"
+                        modalData={clickedId}
+                    ></ConfirmationModal>
+                )}
+            </div>
+        </>
     );
 };
 

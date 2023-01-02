@@ -135,7 +135,7 @@ const SignUp = () => {
                     >
                         <div className="card-body rounded-2xl">
                             <h1 className="mt-6 text-5xl font-bold text-center mx-auto">
-                                Register now
+                                Sign Up
                             </h1>
                             <div className="form-control">
                                 <label className="label">
@@ -183,24 +183,28 @@ const SignUp = () => {
                             </div>
                             <div className="form-control">
                                 <label className="label cursor-pointer">
-                                    <span className="label-text">Buyer</span>
+                                    <span className="label-text text-xl font-semibold">
+                                        Buyer
+                                    </span>
                                     <input
                                         type="radio"
                                         name="role"
                                         value="buyer"
-                                        className="radio checked:bg-red-500"
+                                        className="radio checked:bg-primary "
                                         checked
                                     />
                                 </label>
                             </div>
                             <div className="form-control">
                                 <label className="label cursor-pointer">
-                                    <span className="label-text">Seller</span>
+                                    <span className="label-text text-xl font-semibold">
+                                        Seller
+                                    </span>
                                     <input
                                         type="radio"
                                         name="role"
                                         value="seller"
-                                        className="radio checked:bg-blue-500"
+                                        className="radio checked:bg-primary"
                                     />
                                 </label>
                             </div>
@@ -209,9 +213,9 @@ const SignUp = () => {
                             </div>
                             <div className="form-control mt-6">
                                 <input
-                                    className="btn btn-primary"
+                                    className="btn btn-primary text-white"
                                     type="submit"
-                                    value="Register"
+                                    value="Sign Up"
                                 />
                             </div>
                             <label className="label">

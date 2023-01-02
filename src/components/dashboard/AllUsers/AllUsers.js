@@ -1,10 +1,14 @@
+/* eslint-disable no-mixed-operators */
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import ConfirmationModal from "../../ConfirmationModal/ConfirmationModal";
 import Buyers from "./Buyers";
+// import { useContext } from "react";
+// import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 
 const AllUsers = () => {
+    // const{ loading} = useContext(AuthContext)
     const [deletingSellers, setDeletingSellers] = useState(null);
     // const [deletingBuyers, setDeletingbuyers] = useState(null);
 
@@ -36,7 +40,12 @@ const AllUsers = () => {
             });
     };
 
-    const { data: sellers = [], refetch } = useQuery({
+    const {
+        data: sellers = [],
+        refetch,
+        isFetching,
+        // isLoading,
+    } = useQuery({
         queryKey: ["sellers"],
         queryFn: async () => {
             const res = await fetch(
@@ -88,51 +97,65 @@ const AllUsers = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {sellers.map((seller, i) => (
-                                    <tr key={seller._id}>
-                                        {console.log(seller)}
-                                        <th>{i + 1}</th>
-                                        <td>{seller.name}</td>
-                                        <td>{seller.email}</td>
-                                        <td>
-                                            {seller.isVerified !==
-                                            "verified" ? (
-                                                <button
+                                {sellers.map((seller, i) =>
+                                    isFetching ? (
+                                        <>
+                                            {" "}
+                                            <tr className="">
+                                                <progress className="progress w-96  translate-x-1/2"></progress>
+                                            </tr>{" "}
+                                            <br />
+                                        </>
+                                    ) : (
+                                        <tr key={seller._id}>
+                                            {console.log(seller)}
+                                            <th>{i + 1}</th>
+                                            <td>{seller.name}</td>
+                                            <td>{seller.email}</td>
+
+                                            <td>
+                                                {seller.isVerified !==
+                                                "verified" ? (
+                                                    <button
+                                                        onClick={() =>
+                                                            handleVerified(
+                                                                seller._id
+                                                            )
+                                                        }
+                                                        className="btn normal-case  btn-xs bg-blue-300/80 hover:bg-blue-600  hover:text-white text-white border-0  font-bold "
+                                                    >
+                                                        Verify Seller
+                                                    </button>
+                                                ) : (
+                                                    <p
+                                                        onClick={() =>
+                                                            handleVerified(
+                                                                seller._id
+                                                            )
+                                                        }
+                                                        className=" cursor-default text-white hover:bg-green-500 btn btn-xs bg-green-500 border-0 normal-case   "
+                                                    >
+                                                        Verifed
+                                                    </p>
+                                                )}
+                                            </td>
+
+                                            <td>
+                                                <label
                                                     onClick={() =>
-                                                        handleVerified(
-                                                            seller._id
+                                                        setDeletingSellers(
+                                                            seller
                                                         )
                                                     }
-                                                    className="btn normal-case  btn-primary btn-xs bg-sky-200 hover:bg-sky-500  hover:text-white text-green-600 border-0  font-bold "
+                                                    htmlFor="confirmation-modal"
+                                                    className=" btn normal-case text-white bg-red-700 border-0 btn-xs "
                                                 >
-                                                    Verify Seller
-                                                </button>
-                                            ) : (
-                                                <p
-                                                    onClick={() =>
-                                                        handleVerified(
-                                                            seller._id
-                                                        )
-                                                    }
-                                                    className=" cursor-default hover:bg-green-500 btn btn-xs bg-green-500 border-0 normal-case   "
-                                                >
-                                                    Verifed
-                                                </p>
-                                            )}
-                                        </td>
-                                        <td>
-                                            <label
-                                                onClick={() =>
-                                                    setDeletingSellers(seller)
-                                                }
-                                                htmlFor="confirmation-modal"
-                                                className=" btn normal-case bg-red-700 border-0 btn-xs "
-                                            >
-                                                Delete
-                                            </label>
-                                        </td>
-                                    </tr>
-                                ))}
+                                                    Delete
+                                                </label>
+                                            </td>
+                                        </tr>
+                                    )
+                                )}
                             </tbody>
                         </table>
                     </div>

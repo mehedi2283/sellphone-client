@@ -17,7 +17,7 @@ const useSellerVerified = (email) => {
                 setIsSellerLoadingVerified(false);
             });
         // }
-    }, []);
+    }, [email]);
     return [sellerVerified, isSellerLoadingVerified];
 };
 export default useSellerVerified;
