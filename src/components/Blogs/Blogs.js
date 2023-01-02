@@ -61,7 +61,7 @@ const Blogs = () => {
                 </p>
             </section> */}
 
-            <h1 className="text-6xl flex justify-center items-center">comming soon...</h1>
+            <h1 className="text-6xl flex justify-center items-center">coming soon...</h1>
         </div>
     );
 };

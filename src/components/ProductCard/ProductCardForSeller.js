@@ -118,7 +118,7 @@ const ProductCardForSeller = ({ product, refetch }) => {
     return (
         <>
             <div
-                data-aos="fade-up"
+                // data-aos="fade-down"
                 className="boxShadow rounded-md card card-compact w-80  my-14 border border-primary/50 bg-primary/5 "
             >
                 <figure>

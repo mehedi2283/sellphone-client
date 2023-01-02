@@ -13,7 +13,7 @@ const MyProducts = () => {
         queryKey: ["orders", user?.email],
         queryFn: async () => {
             const res = await fetch(
-                `http://localhost:5000/myProducts?email=${user?.email}`,
+                `https://sellphone-server-mehedi2283.vercel.app/myProducts?email=${user?.email}`,
                 {
                     headers: {
                         authorization: `bearer ${localStorage.getItem(
@@ -27,7 +27,7 @@ const MyProducts = () => {
         },
     });
 
-    console.log(myProducts);
+    console.log('wow',myProducts);
     return (
         <>
             <div className="mt-20">
